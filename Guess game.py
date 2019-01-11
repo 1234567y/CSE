@@ -28,46 +28,10 @@ while guesses > 0 and playing:
 
 
 
-
-
-
-
-
-
-
-
-string2 = "Join"
-list2 = list(string2)
-print(list2)
-
-string3 = "myth"
-list3 = list(string3)
-print(list3)
-
-string4 = "phone"
-list4 = list(string4)
-print(list4)
-
-string5 = "laptop"
-list5 = list(string5)
-print(list5)
-
-string6 = "desk"
-list6 = list(string6)
-print(list6)
-
-string7 = "light"
-list7 = list(string7)
-print(list7)
-
-string8 = "handle"
-list8 = list(string8)
-print(list8)
-
-string9 = "kid"
-list9 = list(string9)
-print(list9)
-
-string10 = "pencil"
-list10 = list(string10)
-print(list10)
+    if guess == answer:
+        Guesses -= 10
+        print("You got it.")
+    elif guess != answer:
+        Guesses -= 1
+        print(guess)
+        print("Wrong letter")
