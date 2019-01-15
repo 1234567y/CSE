@@ -1,3 +1,4 @@
+import string
 # review
 print("hello world")
 # ooga booga
@@ -11,3 +12,5 @@ colors.append("yellow")
 colors.pop(2)
 print(colors[2])
 print(len(colors))
+
+print(string.punctuation)
