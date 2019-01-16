@@ -1,6 +1,6 @@
 import random
 Guesses = 10
-words = ["crypt", "Join", "myth", "phone", "laptop", "desk", "light", "handle", "kid", "Edison's"]
+words = ["crypt", "Join", "myth", "phone", "laptop", "desk", "light", "handle", "kid", "edison's"]
 answer = random.choice(words)
 print("You have 10 tries.")
 letters_guessed = []
@@ -76,16 +76,22 @@ if answer == "pencil":
     ("*".join(list10))
 
 while Guesses > 0:
+    # Show/Hide word
+    output = []
+    # Ask for input
     guess = input("Guess a letter.")
     letters_guessed.append(guess)
     print(letters_guessed)
+    for letter in answer:
+        if letter in letters_guessed:
+            output.append(letter)
+        else:
+            output.append("_")
+    print(output)
     if guess == answer:
         Guesses -= 10
         print("You got it.")
-    if guess in answer:
-        Guesses -= 1
-        print(guess)
-    elif guess != answer:
+    if guess != answer:
         Guesses -= 1
         print(guess)
         print("Wrong letter")
