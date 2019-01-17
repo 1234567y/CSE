@@ -76,9 +76,7 @@ if answer == "pencil":
     ("*".join(list10))
 
 while Guesses > 0:
-    # Show/Hide word
     output = []
-    # Ask for input
     guess = input("Guess a letter.")
     letters_guessed.append(guess)
     print(letters_guessed)
@@ -86,12 +84,13 @@ while Guesses > 0:
         if letter in letters_guessed:
             output.append(letter)
         else:
-            output.append("_")
-    print(output)
-    if guess == answer:
+            output.append("_ ")
+    print("".join(output))
+    if output == list(answer):
         Guesses -= 10
-        print("You got it.")
-    if guess != answer:
-        Guesses -= 1
+        print("You got it")
+    if guess in answer:
         print(guess)
+    elif guess != answer:
+        Guesses -= 1
         print("Wrong letter")
