@@ -1,4 +1,5 @@
 import random
+import string
 Guesses = 10
 words = ["crypt", "Join", "myth", "phone", "laptop", "desk", "light", "handle", "kid", "edison's"]
 answer = random.choice(words)
@@ -70,8 +71,8 @@ if answer == "kid":
 
 # pencil code
 
-if answer == "pencil":
-    string10 = "pencil"
+if answer == "edison's":
+    string10 = "edison's"
     list10 = list(string10)
     ("*".join(list10))
 
@@ -87,8 +88,8 @@ while Guesses > 0:
             output.append("_ ")
     print("".join(output))
     if output == list(answer):
-        Guesses -= 10
         print("You got it")
+        Guesses -= 10
     if guess in answer:
         print(guess)
     elif guess != answer:
