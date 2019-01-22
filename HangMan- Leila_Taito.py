@@ -1,10 +1,10 @@
 import random
-import string
 Guesses = 10
 words = ["crypt", "Join", "myth", "phone", "laptop", "desk", "light", "handle", "kid", "edison's"]
 answer = random.choice(words)
 print("You have 10 tries.")
 letters_guessed = []
+punctuation = ["'"]
 
 # crypt code
 
