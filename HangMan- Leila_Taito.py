@@ -1,10 +1,11 @@
 import random
+import string
 Guesses = 10
 words = ["crypt", "Join", "myth", "phone", "laptop", "desk", "light", "handle", "kid", "edison's"]
 answer = random.choice(words)
+answer = "Join"
 print("You have 10 tries.")
-letters_guessed = []
-punctuation = ["'"]
+letters_guessed = ["'"]
 
 # crypt code
 
@@ -16,6 +17,7 @@ if answer == "crypt":
 # Join code
 
 if answer == "Join":
+    print("1st letter upper cased")
     string2 = "Join"
     list2 = list(string2)
     ("*".join(list2))
