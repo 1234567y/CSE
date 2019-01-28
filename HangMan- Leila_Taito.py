@@ -1,9 +1,7 @@
 import random
-import string
 Guesses = 10
 words = ["crypt", "Join", "myth", "phone", "laptop", "desk", "light", "handle", "kid", "edison's"]
 answer = random.choice(words)
-answer = "Join"
 print("You have 10 tries.")
 letters_guessed = ["'"]
 
@@ -71,7 +69,7 @@ if answer == "kid":
     list9 = list(string9)
     ("*".join(list9))
 
-# pencil code
+# edison's code
 
 if answer == "edison's":
     string10 = "edison's"
