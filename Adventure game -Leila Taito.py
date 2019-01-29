@@ -1,6 +1,11 @@
 Lives = 1
-Moves = ["N", "E"]
+Moves = [
+    "N: North",
+    "E: East",
+    "S: South",
+    "N: North"
+]
 
 while Lives < 0:
-    move = input("Choose to go N, E, S, or W")
+    move = input("Choose a way to go")
     if move == "N":
