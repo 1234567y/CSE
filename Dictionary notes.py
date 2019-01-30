@@ -2,7 +2,7 @@ states = {
     "CA": "California",
     "NJ": "New Jersey",
     "WI": "Wisconsin",
-    "NY": "NewYork"
+    "NY": "New York"
 }
 
 print(states["CA"])
@@ -54,18 +54,37 @@ complex_dictionary = {
         "NAME": "Wisconsin",
         "POPULATION": 5800000,  # 5,800,000
         "CITIES": [
-            "",
-            "",
-            ""
+            "Madison",
+            "Milwaukee",
+            "Green Bay"
         ]
     },
     "NY": {
-        "NAME": "New Jersey",
+        "NAME": "New York",
         "POPULATION": 19500000,  # 19,500,000
         "CITIES": [
-            "",
-            "",
-            ""
+            "New York",
+            "Rockester",
+            "Buffalo"
         ]
     }
 }
+
+print(complex_dictionary["NY"]["CITIES"][0])
+print(complex_dictionary["NJ"]["CITIES"][2])
+
+print(complex_dictionary.keys())
+print(complex_dictionary.items())
+print(nested_dictionary.items())
+
+for key, value in complex_dictionary.items():
+    print(key)
+    print(value)
+    print("-" * 20)
+
+for state, info in complex_dictionary.items():
+    for title, desc in info.items():
+        print(title)
+        print(desc)
+        print("-" * 20)
+    print("=" * 20)
