@@ -1,11 +1,23 @@
-Lives = 1
-Moves = [
-    "N: North",
-    "E: East",
-    "S: South",
-    "N: North"
-]
+import random
+lives = 1
+food = 0
+Food = ["Pizza", "Fries", "Poison berry"]
 
-while Lives < 0:
-    move = input("Choose a way to go")
-    if move == "N":
+Cities = {
+    "LA",
+    "San Fransisco",
+    "Washington",
+    "Oregon",
+    "Mexico",
+    "Fresno",
+    "Antioch",
+    "Daily City",
+    "Kerman",
+    "Clovis",
+    "Selma",
+    "Hanford",
+    "Dinuba",
+    "Madera",
+    "Riverdale"
+}
+print(Cities)

@@ -3,7 +3,7 @@ world_map = {
         'NAME': "Mr.Wiebe's room",
         'DESCRIPTION': "This is the room that you are in",
         'PATHS': {
-            'NORTH': "PARKING LOT"
+            'NORTH': "PARKING_LOT"
         }
     },
     'PARKING_LOT': {
