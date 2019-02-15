@@ -1,6 +1,7 @@
-import radnom
+import random
 
-class RanomWiebe:
 
-    def special_random(self):
+class RandomWiebe:
+    @staticmethod
+    def special_random():
         return random.randint(1, 100)

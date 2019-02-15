@@ -1,3 +1,6 @@
+import Special_Random
+
+
 class Laptop(object):
     def __init__(self, screen_resolution, extra_space=1000, colour="Cobalt"):
         # Things that a laptop has.
@@ -50,3 +53,5 @@ my_computer.charge(20)
 my_computer.charge(1000)
 my_computer.smash()
 my_computer.charge(20)
+
+print(Special_Random.RandomWiebe.special_random())
