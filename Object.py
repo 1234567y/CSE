@@ -18,3 +18,11 @@ class Monster(object):
         print()
         print("Have died.")
 
+    def attack(self, attacked):
+        if self.functioning:
+            
+
+    def deaths(self, death):
+        if self.functioning:
+            if death:
+                self.functioning = True
