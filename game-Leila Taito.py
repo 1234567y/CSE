@@ -42,7 +42,7 @@ areas = {
       'DESCRIPTION': "From here you go to San Fransisco",
       'PATHS': {
             'South': "San Fransisco",
-            'North': "LA"
+            'North': "Kerman"
         }
     },
     'San Fransisco': {
