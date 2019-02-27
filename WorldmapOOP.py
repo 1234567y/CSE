@@ -1,10 +1,13 @@
 class Room(object):
     # This is constructor
-    def __init__(self, name, east=None, north=None, south=None):  # declared stuff on right not declared stuff on left
+    def __init__(self, name, east=None, north=None, south=None, description="no", character='R19A'):
+        # declared stuff on right not declared stuff on left
         self.name = name
         self.east = east
         self.north = north
         self.south = south
+        self.description = description
+        self.character = character
 
 
 class Player(object):
@@ -48,16 +51,16 @@ playing = True
 # Controller
 while playing:
     print(player.current_location.name)
-    
+    print(player.current_location.description)
+
     command = input(">_")
     if command.lower() in ['q', 'quit', 'exit']:
         playing = False
     elif command in directions:
         try:
-            room_name = current_node["PATHS"][command]
-            current_node = world_map[room_name]
+            next_room = player.find_room(command)
+            player.move(next_room)
         except KeyError:
             print("I can't go that way.")
     else:
         print("Command not recognized.")
-
