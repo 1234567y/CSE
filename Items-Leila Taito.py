@@ -8,9 +8,9 @@ class Treasure(Item):
         super(Treasure, self).__init__(name)
 
 
-class Treasures(Treasure):
+class Treasure2(Treasure):
     def __init__(self, name):
-        super(Treasures, self).__init__(name)
+        super(Treasure2, self).__init__(name)
 
 
 class Sword(Item):
@@ -18,21 +18,21 @@ class Sword(Item):
         super(Sword, self).__init__(name)
 
 
-class Iron(Sword):
+class IronS(Sword):
     def __init__(self, name, power=60):
-        super(Iron, self).__init__(name)
+        super(IronS, self).__init__(name)
         self.power = power
 
 
-class Diamond(Sword):
+class DiamondS(Sword):
     def __init__(self, name, power=90):
-        super(Diamond, self).__init__(name)
+        super(DiamondS, self).__init__(name)
         self.power = power
 
 
-class Wood(Sword):
+class WoodS(Sword):
     def __init__(self, name, power=10):
-        super(Wood, self).__init__(name)
+        super(WoodS, self).__init__(name)
         self.power = power
 
 
@@ -41,9 +41,9 @@ class Helmet(Item):
         super(Helmet, self).__init__(name)
 
 
-class Leather(Helmet):
+class Leatherhel(Helmet):
     def __init__(self, name, strength=10):
-        super(Leather, self).__init__(name)
+        super(Leatherhel, self).__init__(name)
         self.strength = strength
 
 
@@ -150,3 +150,22 @@ class ChainB(Boots):
     def __init__(self, name, durability=20):
         super(ChainB, self).__init__(name)
         self.durability = durability
+
+
+Treasure = Treasure2("Treasure")
+Iron_Sword = IronS("Iron Sword")
+Diamond_Sword = DiamondS("Diamond Sword")
+Wood_Sword = WoodS("Wood Sword")
+Leather_Helmet = Leatherhel("Leather Helmet")
+Chain_Helmet = Chainhel("Chain Helmet")
+Diamond_Helmet = Diamondhel("Diamond Helmet")
+Iron_Helmet = Ironhel("Iron Helmet")
+Diamond_Chestplate = Diamondches("Diamond Chest plate")
+Iron_Chestplate = Ironches("Iron Chest plate")
+Leather_Chestplate = Leatherches("Leather Chest plate")
+Chain_Chestplate = Chainches("Chain Chest plate")
+Diamond_Pants = DiamondP("Diamond Pants")
+Iron_Pants = IronP("Iron Pants")
+Leather_Pants = LeatherP("Leather Pants")
+Chain_Pants = ChainP("Chain Pants")
+Diamond_Boots = DiamondB("Diamond Boots")
