@@ -8,6 +8,11 @@ class Treasure(Item):
         super(Treasure, self).__init__(name)
 
 
+class Treasure1(Treasure):
+    def __init__(self, name):
+        super(Treasure1, self).__init__(name)
+
+
 class Treasure2(Treasure):
     def __init__(self, name):
         super(Treasure2, self).__init__(name)
@@ -19,21 +24,24 @@ class Sword(Item):
 
 
 class IronS(Sword):
-    def __init__(self, name, power=60):
+    def __init__(self, name, power=60, durability=69):
         super(IronS, self).__init__(name)
         self.power = power
+        self.durability = durability
 
 
 class DiamondS(Sword):
-    def __init__(self, name, power=90):
+    def __init__(self, name, power=90, durability=99):
         super(DiamondS, self).__init__(name)
         self.power = power
+        self.durability = durability
 
 
 class WoodS(Sword):
-    def __init__(self, name, power=10):
+    def __init__(self, name, power=10, durability=11):
         super(WoodS, self).__init__(name)
         self.power = power
+        self.durability = durability
 
 
 class Helmet(Item):
@@ -152,20 +160,24 @@ class ChainB(Boots):
         self.durability = durability
 
 
-Treasure = Treasure2("Treasure")
-Iron_Sword = IronS("Iron Sword")
-Diamond_Sword = DiamondS("Diamond Sword")
-Wood_Sword = WoodS("Wood Sword")
-Leather_Helmet = Leatherhel("Leather Helmet")
-Chain_Helmet = Chainhel("Chain Helmet")
-Diamond_Helmet = Diamondhel("Diamond Helmet")
-Iron_Helmet = Ironhel("Iron Helmet")
-Diamond_Chestplate = Diamondches("Diamond Chest plate")
-Iron_Chestplate = Ironches("Iron Chest plate")
-Leather_Chestplate = Leatherches("Leather Chest plate")
-Chain_Chestplate = Chainches("Chain Chest plate")
-Diamond_Pants = DiamondP("Diamond Pants")
-Iron_Pants = IronP("Iron Pants")
-Leather_Pants = LeatherP("Leather Pants")
-Chain_Pants = ChainP("Chain Pants")
-Diamond_Boots = DiamondB("Diamond Boots")
+treasure = Treasure2("Treasure #2")
+treasures = Treasure1("Treasure #1")
+iron_sword = IronS("Iron Sword")
+diamond_sword = DiamondS("Diamond Sword")
+wood_sword = WoodS("Wood Sword")
+leather_helmet = Leatherhel("Leather Helmet")
+chain_helmet = Chainhel("Chain Helmet")
+diamond_helmet = Diamondhel("Diamond Helmet")
+iron_helmet = Ironhel("Iron Helmet")
+diamond_chestplate = Diamondches("Diamond Chest plate")
+iron_chestplate = Ironches("Iron Chest plate")
+leather_chestplate = Leatherches("Leather Chest plate")
+chain_chestplate = Chainches("Chain Chest plate")
+diamond_pants = DiamondP("Diamond Pants")
+iron_pants = IronP("Iron Pants")
+leather_pants = LeatherP("Leather Pants")
+chain_pants = ChainP("Chain Pants")
+diamond_boots = DiamondB("Diamond Boots")
+iron_boots = IronB("Iron Boots")
+chain_boots = ChainB("Chain Boots")
+leather_boots = LeatherB("Leather Boots")
