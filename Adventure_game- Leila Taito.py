@@ -6,6 +6,7 @@ class Room(object):
         self.west = west
         self.east = east
         self.south = south
+        self.items = []
 
 
 class Item(object):
@@ -271,13 +272,13 @@ Madera = Room("Madera", "Leads to another room", None, None, None, Dinuba)
 Riverdale = Room("Riverdale", "Leads to another room", Fresno, Madera, None, None)
 
 
-Fresno.north = Riverdale
 Fresno.west = Kerman
-Fresno.east = wood_sword
-Fresno.south = iron_sword
+Fresno.north = Riverdale
+Fresno.items.append(wood_sword)
+Fresno.items.append(iron_sword)
 Kerman.north = LA
-Kerman.east = diamond_helmet
-Kerman.south = leather_helmet
+Kerman.items.append(diamond_helmet)
+Kerman.items.append(leather_helmet)
 LA.south = SanFransisco
 LA.east = iron_boots
 LA.west = diamond_sword
