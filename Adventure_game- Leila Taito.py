@@ -193,9 +193,9 @@ class ChainB(Boots):
 
 
 class Potion(Item):
-    def __init__(self, name, descripton):
+    def __init__(self, name, description):
         super(Potion, self).__init__(name)
-        self.description = descripton
+        self.description = description
 
     def health(self):
         if command == "drink":
@@ -280,8 +280,8 @@ Kerman.north = LA
 Kerman.items.append(diamond_helmet)
 Kerman.items.append(leather_helmet)
 LA.south = SanFransisco
-LA.east = iron_boots
-LA.west = diamond_sword
+LA.items.append(iron_boots)
+LA.items.append(diamond_sword)
 SanFransisco.east = Washington
 SanFransisco.north = Enemy
 Washington.west = Oregon
@@ -298,6 +298,7 @@ Madera.west = Riverdale
 player = Player(Fresno)
 
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
+
 playing = True
 
 # Controller
