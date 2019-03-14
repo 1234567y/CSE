@@ -24,7 +24,7 @@ class Character(object):
 
     def take_damage(self, damage):
         if damage < self.armor.armor_amt:
-            print("No damage is done because of some fabulous armor!")
+            print("No damage is done because of armor")
         else:
             self.health -= damage - self.armor.armor_amt
             if self.health < 0:
@@ -37,13 +37,7 @@ class Character(object):
         target.take_damage(self.weapon.damage)
 
 
-sword = Weapon("Sword", 10)
-canoe = Weapon("canoe", 84)
-wiebe_armor = Armor("Armor of the Gods", 1000000000000000)  # That's a lot of damage!
-
-orc = Character("Orc", 100, sword, Armor("Generic Armor", 2))
-wiebe = Character("Wiebe", 100000000000, canoe, wiebe_armor)
-
-orc.attack(wiebe)
-wiebe.attack(orc)
-wiebe.attack(orc)
+class DiamondS(Weapon):
+    def __init__(self, name):
+        super(DiamondS, self).__init__(name)
+        self.damage = 90

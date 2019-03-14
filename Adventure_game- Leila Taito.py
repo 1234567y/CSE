@@ -31,31 +31,38 @@ class Treasure2(Treasure):
         self.description = description
 
 
+class Weapon(Item):
+    def __init__(self, name, description, damage):
+        super(Weapon, self).__init__(name)
+        self.damage = damage
+        self.description = description
+
+
 class Sword(Item):
     def __init__(self, name):
         super(Sword, self).__init__(name)
 
 
 class IronS(Sword):
-    def __init__(self, name, description, power=60, durability=69):
+    def __init__(self, name, description, damage, durability=69):
         super(IronS, self).__init__(name)
-        self.power = power
+        self.damage = damage
         self.durability = durability
         self.description = description
 
 
 class DiamondS(Sword):
-    def __init__(self, name, description, power=90, durability=99, ):
+    def __init__(self, name, description, damage, durability=99, ):
         super(DiamondS, self).__init__(name)
-        self.power = power
+        self.damage = damage
         self.durability = durability
         self.description = description
 
 
 class WoodS(Sword):
-    def __init__(self, name, description, power=10, durability=11):
+    def __init__(self, name, description, damage, durability=11):
         super(WoodS, self).__init__(name)
-        self.power = power
+        self.damage = damage
         self.durability = durability
         self.description = description
 
@@ -224,18 +231,37 @@ class Player(object):
         return getattr(self.current_location, direction)
 
 
-class Enemy(object):
-    def __init__(self):
-        self.health = 100
-        self.inventory = [diamond_sword]
-        self.current_location = SanFransisco.north
+class Character(Player):
+    def __init__(self, name, health, weapon, helmet, chestplate, pants, boots):
+        super(Character, self).__init__(name)
+        self.name = name
+        self.health = health
+        self.weapon = weapon
+        self.armor = helmet
+        self.armor = chestplate
+        self.armor = pants
+        self.armor = boots
+
+    def take_damage(self, damage):
+        if damage < self.armor.armor_amt:
+            print("No damage is done because of some fabulous armor!")
+        else:
+            self.health -= damage - self.armor.armor_amt
+            if self.health < 0:
+                self.health = 0
+                print("%s has fallen" % self.name)
+        print("%s has %d health left" % (self.name, self.health))
+
+    def attack(self, target):
+        print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
+        target.take_damage(self.weapon.damage)
 
 
 treasure = Treasure2("Treasure #2", "This is an item you need")
 treasures = Treasure1("Treasure #1", "You also need this to win the game")
-iron_sword = IronS("Iron Sword", "This is a sword")
-diamond_sword = DiamondS("Diamond Sword", "This is the strongest sword you can get")
-wood_sword = WoodS("Wood Sword", "This is the weakest sword you can get")
+iron_sword = IronS("Iron Sword", "This is a sword", 60)
+diamond_sword = DiamondS("Diamond Sword", "This is the strongest sword you can get", 90)
+wood_sword = WoodS("Wood Sword", "This is the weakest sword you can get", 10)
 leather_helmet = Leatherhel("Leather Helmet", "This is the weakest helmet you can get")
 chain_helmet = Chainhel("Chain Helmet", "This is a helmet")
 diamond_helmet = Diamondhel("Diamond Helmet", "This is the strongest helmet you can get")
@@ -253,6 +279,7 @@ iron_boots = IronB("Iron Boots", "This is boots")
 chain_boots = ChainB("Chain Boots", "This is boots")
 leather_boots = LeatherB("Leather Boots", "This is boots")
 health_potion = Potion("Health Potion", "This is a health potion drink it to gain health")
+orc = Character("Orc", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
 
 
 Fresno = Room("Fresno", "Leads to another room", None, None, None, None)
@@ -283,7 +310,6 @@ LA.south = SanFransisco
 LA.items.append(iron_boots)
 LA.items.append(diamond_sword)
 SanFransisco.east = Washington
-SanFransisco.north = Enemy
 Washington.west = Oregon
 Oregon.south = Mexico
 Mexico.north = Antioch
