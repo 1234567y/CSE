@@ -1,12 +1,12 @@
 class Room(object):
     def __init__(self, name, description=None, north=None, west=None, east=None, south=None):
         self.name = name
+        self.items = []
         self.description = description
         self.north = north
         self.west = west
         self.east = east
         self.south = south
-        self.items = []
 
 
 class Item(object):
@@ -216,18 +216,9 @@ class Player(object):
         self.current_location = starting_location
 
     def move(self, new_location):
-        """ This moves a player to a new location
-
-        :param new_location: The room object that we move to
-        """
         self.current_location = new_location
 
     def find_room(self, direction):
-        """This method takes a direction, and finds the variable of the room.
-
-        :param direction: A string (all lowercase), with a cardinal direction
-        :return: A room object if it exists, None if it does not
-        """
         return getattr(self.current_location, direction)
 
 
@@ -257,6 +248,7 @@ class Character(Player):
         target.take_damage(self.weapon.damage)
 
 
+# Items and shit
 treasure = Treasure2("Treasure #2", "This is an item you need")
 treasures = Treasure1("Treasure #1", "You also need this to win the game")
 iron_sword = IronS("Iron Sword", "This is a sword", 60)
@@ -279,9 +271,11 @@ iron_boots = IronB("Iron Boots", "This is boots")
 chain_boots = ChainB("Chain Boots", "This is boots")
 leather_boots = LeatherB("Leather Boots", "This is boots")
 health_potion = Potion("Health Potion", "This is a health potion drink it to gain health")
+
+# Character set up
 orc = Character("Orc", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
 
-
+# Rooms
 Fresno = Room("Fresno", "Leads to another room", None, None, None, None)
 Kerman = Room("Kerman", "Leads to another room", None, Fresno, None, None)
 LA = Room("LA", "Leads to another room", Kerman, None, None, None)
@@ -298,7 +292,7 @@ Dinuba = Room("Dinuba", "Leads to another room", None, Hanford, None, None)
 Madera = Room("Madera", "Leads to another room", None, None, None, Dinuba)
 Riverdale = Room("Riverdale", "Leads to another room", Fresno, Madera, None, None)
 
-
+# Defining shit
 Fresno.west = Kerman
 Fresno.north = Riverdale
 Fresno.items.append(wood_sword)
@@ -310,6 +304,8 @@ LA.south = SanFransisco
 LA.items.append(iron_boots)
 LA.items.append(diamond_sword)
 SanFransisco.east = Washington
+SanFransisco.items.append(chain_boots)
+SanFransisco.items.append(diamond_chestplate)
 Washington.west = Oregon
 Oregon.south = Mexico
 Mexico.north = Antioch
@@ -331,6 +327,9 @@ playing = True
 while playing:
     print(player.current_location.name)
     print(player.current_location.description)
+
+    for item in player.current_location.items:
+        print(item.name)
 
     command = input(">_")
     if command in directions:
