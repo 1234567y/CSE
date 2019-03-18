@@ -307,8 +307,13 @@ SanFransisco.east = Washington
 SanFransisco.items.append(chain_boots)
 SanFransisco.items.append(diamond_chestplate)
 Washington.west = Oregon
+Washington.items.append(health_potion)
+Washington.items.append(chain_chestplate)
 Oregon.south = Mexico
+Oregon.items.append(diamond_boots)
+Oregon.items.append(iron_chestplate)
 Mexico.north = Antioch
+Mexico.items.append(orc)
 Antioch.east = DailyCity
 DailyCity.south = Clovis
 Clovis.east = Selma
@@ -319,7 +324,7 @@ Madera.west = Riverdale
 
 player = Player(Fresno)
 
-directions = ['north', 'south', 'east', 'west', 'up', 'down']
+directions = ['north', 'south', 'east', 'west', 'pick up']
 
 playing = True
 
@@ -333,14 +338,19 @@ while playing:
 
     command = input(">_")
     if command in directions:
+
         try:
             next_room = player.find_room(command)
+
             if next_room is None:
                 raise KeyError
             player.move(next_room)
+
         except KeyError:
             print("I can't go that way.")
+
     elif command.lower() in ['q', 'quit', 'exit']:
             playing = False
+
     else:
         print("Command not recognized.")
