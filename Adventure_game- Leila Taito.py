@@ -1,8 +1,9 @@
 class Room(object):
-    def __init__(self, name, description=None, north=None, west=None, east=None, south=None):
+    def __init__(self, name, character, description=None, north=None, west=None, east=None, south=None):
         self.name = name
-        self.items = []
+        self.character = character
         self.description = description
+        self.items = []
         self.north = north
         self.west = west
         self.east = east
@@ -274,6 +275,7 @@ health_potion = Potion("Health Potion", "This is a health potion drink it to gai
 
 # Character set up
 orc = Character("Orc", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
+Jemi = Character("Jemi", 100, None, chain_helmet, chain_chestplate,chain_pants, chain_boots)
 
 # Rooms
 Fresno = Room("Fresno", "Leads to another room", None, None, None, None)
@@ -319,8 +321,10 @@ DailyCity.south = Clovis
 Clovis.east = Selma
 Selma.north = Hanford
 Hanford.west = Dinuba
+Hanford.items.append(treasures)
 Dinuba.south = Madera
 Madera.west = Riverdale
+Riverdale.items.append(treasure)
 
 player = Player(Fresno)
 
