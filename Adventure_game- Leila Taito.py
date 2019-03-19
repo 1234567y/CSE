@@ -1,5 +1,7 @@
 class Room(object):
-    def __init__(self, name, character, description=None, north=None, west=None, east=None, south=None):
+    def __init__(self, name, character=None, description=None, north=None, west=None, east=None, south=None):
+        if character is None:
+            character = {}
         self.name = name
         self.character = character
         self.description = description
@@ -275,7 +277,7 @@ health_potion = Potion("Health Potion", "This is a health potion drink it to gai
 
 # Character set up
 orc = Character("Orc", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
-Jemi = Character("Jemi", 100, None, chain_helmet, chain_chestplate,chain_pants, chain_boots)
+Jemi = Character("Jemi", 100, None, chain_helmet, chain_chestplate, chain_pants, chain_boots)
 
 # Rooms
 Fresno = Room("Fresno", "Leads to another room", None, None, None, None)
@@ -338,9 +340,14 @@ while playing:
     print(player.current_location.description)
 
     for item in player.current_location.items:
+        print("Jemi is in %s" % player.current_location.name)
         print(item.name)
+        if Jemi.current_location is Mexico:
+            print("You now have to fight the orc. Type attack orc to attack.")
+            orc.attack(Jemi)
 
     command = input(">_")
+
     if command in directions:
 
         try:
