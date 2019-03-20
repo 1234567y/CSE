@@ -212,8 +212,34 @@ class Potion(Item):
             self.health += 40
 
 
-class Player(object):
+class Character(object):
+    def __init__(self, name, health, weapon, helmet, chestplate, pants, boots):
+        self.name = name
+        self.health = health
+        self.weapon = weapon
+        self.armor = helmet
+        self.armor = chestplate
+        self.armor = pants
+        self.armor = boots
+
+    def take_damage(self, damage):
+        if damage < self.armor.durability:
+            print("No damage is done because of some fabulous armor!")
+        else:
+            self.health -= damage - self.armor.durability
+            if self.health < 0:
+                self.health = 0
+                print("%s has fallen" % self.name)
+        print("%s has %d health left" % (self.name, self.health))
+
+    def attack(self, target):
+        print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
+        target.take_damage(self.weapon.damage)
+
+
+class Player(Character):
     def __init__(self, starting_location):
+        super(Player, self).__init__("Jemi", 100, None, chain_helmet, chain_chestplate, chain_pants, chain_boots)
         self.health = 100
         self.inventory = []
         self.current_location = starting_location
@@ -225,33 +251,7 @@ class Player(object):
         return getattr(self.current_location, direction)
 
 
-class Character(Player):
-    def __init__(self, name, health, weapon, helmet, chestplate, pants, boots):
-        super(Character, self).__init__(name)
-        self.name = name
-        self.health = health
-        self.weapon = weapon
-        self.armor = helmet
-        self.armor = chestplate
-        self.armor = pants
-        self.armor = boots
-
-    def take_damage(self, damage):
-        if damage < self.armor.armor_amt:
-            print("No damage is done because of some fabulous armor!")
-        else:
-            self.health -= damage - self.armor.armor_amt
-            if self.health < 0:
-                self.health = 0
-                print("%s has fallen" % self.name)
-        print("%s has %d health left" % (self.name, self.health))
-
-    def attack(self, target):
-        print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
-        target.take_damage(self.weapon.damage)
-
-
-# Items and shit
+# Items
 treasure = Treasure2("Treasure #2", "This is an item you need")
 treasures = Treasure1("Treasure #1", "You also need this to win the game")
 iron_sword = IronS("Iron Sword", "This is a sword", 60)
@@ -277,7 +277,6 @@ health_potion = Potion("Health Potion", "This is a health potion drink it to gai
 
 # Character set up
 orc = Character("Orc", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
-Jemi = Character("Jemi", 100, None, chain_helmet, chain_chestplate, chain_pants, chain_boots)
 
 # Rooms
 Fresno = Room("Fresno", "Leads to another room", None, None, None, None)
@@ -328,40 +327,41 @@ Dinuba.south = Madera
 Madera.west = Riverdale
 Riverdale.items.append(treasure)
 
-player = Player(Fresno)
+jemi = Player(Fresno)
 
-directions = ['north', 'south', 'east', 'west', 'pick up']
+directions = ['north', 'south', 'east', 'west', 'pick up', 'attack orc']
 
 playing = True
 
 # Controller
 while playing:
-    print(player.current_location.name)
-    print(player.current_location.description)
+    print(jemi.current_location.name)
+    print(jemi.current_location.description)
 
-    for item in player.current_location.items:
-        print("Jemi is in %s" % player.current_location.name)
+    for item in jemi.current_location.items:
+        print("Jemi is in %s" % jemi.current_location.name)
         print(item.name)
-        if Jemi.current_location is Mexico:
+        if jemi.current_location == Mexico:
             print("You now have to fight the orc. Type attack orc to attack.")
-            orc.attack(Jemi)
+            orc.attack(jemi)
+    if command == 'attack orc':
+                jemi.attack(orc)
 
     command = input(">_")
-
     if command in directions:
 
         try:
-            next_room = player.find_room(command)
+            next_room = jemi.find_room(command)
 
             if next_room is None:
                 raise KeyError
-            player.move(next_room)
+            jemi.move(next_room)
 
         except KeyError:
             print("I can't go that way.")
 
     elif command.lower() in ['q', 'quit', 'exit']:
-            playing = False
+        playing = False
 
     else:
         print("Command not recognized.")
