@@ -1,7 +1,7 @@
 class Room(object):
     def __init__(self, name, character=None, description=None, north=None, west=None, east=None, south=None):
         if character is None:
-            character = {}
+            character = []
         self.name = name
         self.character = character
         self.description = description
@@ -202,16 +202,6 @@ class ChainB(Boots):
         self.description = description
 
 
-class Potion(Item):
-    def __init__(self, name, description):
-        super(Potion, self).__init__(name)
-        self.description = description
-
-    def health(self):
-        if command == "drink":
-            self.health += 40
-
-
 class Character(object):
     def __init__(self, name, health, weapon, helmet, chestplate, pants, boots):
         self.name = name
@@ -252,28 +242,27 @@ class Player(Character):
 
 
 # Items
-treasure = Treasure2("Treasure #2", "This is an item you need")
-treasures = Treasure1("Treasure #1", "You also need this to win the game")
-iron_sword = IronS("Iron Sword", "This is a sword", 60)
-diamond_sword = DiamondS("Diamond Sword", "This is the strongest sword you can get", 90)
-wood_sword = WoodS("Wood Sword", "This is the weakest sword you can get", 10)
-leather_helmet = Leatherhel("Leather Helmet", "This is the weakest helmet you can get")
-chain_helmet = Chainhel("Chain Helmet", "This is a helmet")
-diamond_helmet = Diamondhel("Diamond Helmet", "This is the strongest helmet you can get")
-iron_helmet = Ironhel("Iron Helmet", "This is a helmet")
-diamond_chestplate = Diamondches("Diamond Chest plate", "This is a chest plate")
-iron_chestplate = Ironches("Iron Chest plate", "This is a chest plate")
-leather_chestplate = Leatherches("Leather Chest plate", "This is a chest plate")
-chain_chestplate = Chainches("Chain Chest plate", "This is a chest plate")
-diamond_pants = DiamondP("Diamond Pants", "This is pants")
-iron_pants = IronP("Iron Pants", "This is pants")
-leather_pants = LeatherP("Leather Pants", "This is pants")
-chain_pants = ChainP("Chain Pants", "This is pants")
-diamond_boots = DiamondB("Diamond Boots", "This is boots")
-iron_boots = IronB("Iron Boots", "This is boots")
-chain_boots = ChainB("Chain Boots", "This is boots")
-leather_boots = LeatherB("Leather Boots", "This is boots")
-health_potion = Potion("Health Potion", "This is a health potion drink it to gain health")
+treasure = Treasure2("treasure #2", "This is an item you need")
+treasures = Treasure1("treasure #1", "You also need this to win the game")
+iron_sword = IronS("iron sword", "This is a sword", 60)
+diamond_sword = DiamondS("diamond sword", "This is the strongest sword you can get", 90)
+wood_sword = WoodS("wood sword", "This is the weakest sword you can get", 10)
+leather_helmet = Leatherhel("leather helmet", "This is the weakest helmet you can get")
+chain_helmet = Chainhel("chain helmet", "This is a helmet")
+diamond_helmet = Diamondhel("diamond helmet", "This is the strongest helmet you can get")
+iron_helmet = Ironhel("iron helmet", "This is a helmet")
+diamond_chestplate = Diamondches("diamond chest plate", "This is a chest plate")
+iron_chestplate = Ironches("iron chest plate", "This is a chest plate")
+leather_chestplate = Leatherches("leather chest plate", "This is a chest plate")
+chain_chestplate = Chainches("chain chest plate", "This is a chest plate")
+diamond_pants = DiamondP("diamond pants", "This is pants")
+iron_pants = IronP("iron pants", "This is pants")
+leather_pants = LeatherP("leather pants", "This is pants")
+chain_pants = ChainP("chain pants", "This is pants")
+diamond_boots = DiamondB("diamond boots", "This is boots")
+iron_boots = IronB("iron boots", "This is boots")
+chain_boots = ChainB("chain boots", "This is boots")
+leather_boots = LeatherB("leather boots", "This is boots")
 
 # Character set up
 orc = Character("Orc", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
@@ -295,7 +284,7 @@ Dinuba = Room("Dinuba", "Leads to another room", None, Hanford, None, None)
 Madera = Room("Madera", "Leads to another room", None, None, None, Dinuba)
 Riverdale = Room("Riverdale", "Leads to another room", Fresno, Madera, None, None)
 
-# Defining shit
+# Defining
 Fresno.west = Kerman
 Fresno.north = Riverdale
 Fresno.items.append(wood_sword)
@@ -310,7 +299,6 @@ SanFransisco.east = Washington
 SanFransisco.items.append(chain_boots)
 SanFransisco.items.append(diamond_chestplate)
 Washington.west = Oregon
-Washington.items.append(health_potion)
 Washington.items.append(chain_chestplate)
 Oregon.south = Mexico
 Oregon.items.append(diamond_boots)
@@ -329,7 +317,7 @@ Riverdale.items.append(treasure)
 
 jemi = Player(Fresno)
 
-directions = ['north', 'south', 'east', 'west', 'pick up', 'attack orc']
+directions = ['north', 'south', 'east', 'west', 'pick up', 'attack orc', 'drop']
 
 playing = True
 
@@ -342,12 +330,11 @@ while playing:
         print("Jemi is in %s" % jemi.current_location.name)
         print(item.name)
         if jemi.current_location == Mexico:
-            print("You now have to fight the orc. Type attack orc to attack.")
+            print("An enemy is in this room fight or flee.")
             orc.attack(jemi)
-    if command == 'attack orc':
-                jemi.attack(orc)
 
     command = input(">_")
+
     if command in directions:
 
         try:
@@ -358,10 +345,39 @@ while playing:
             jemi.move(next_room)
 
         except KeyError:
-            print("I can't go that way.")
+            print("Dead End")
 
     elif command.lower() in ['q', 'quit', 'exit']:
         playing = False
 
+    elif "pick up " in command:
+        item_name = command[8:]
+
+        found_item = None
+        for item in jemi.current_location.items:
+            if item.name == item_name:
+                found_item = item
+
+        if found_item is None:
+            print("I don't see one")
+        else:
+            jemi.inventory.append(found_item)
+            jemi.current_location.items.remove(found_item)
+            print("You pick up the %s" % found_item.name)
+
+    elif "drop" in command:
+        item_name = command[4:]
+
+        found_item = None
+        for item in jemi.inventory:
+            if item.name == item_name:
+                found_item = item
+
+            if found_item is None:
+                print("You don't have that")
+            else:
+                print("You have dropped %s" % found_item)
+                jemi.inventory.remove(found_item)
+                jemi.current_location.items.append(found_item)
     else:
-        print("Command not recognized.")
+        print("Not recognized.")
