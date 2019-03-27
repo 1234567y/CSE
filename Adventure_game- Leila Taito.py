@@ -265,7 +265,7 @@ chain_boots = ChainB("chain boots", "This is boots")
 leather_boots = LeatherB("leather boots", "This is boots")
 
 # Character set up
-orc = Character("Orc", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
+ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
 
 # Rooms
 Fresno = Room("Fresno", "Leads to another room", None, None, None, None)
@@ -304,7 +304,7 @@ Oregon.south = Mexico
 Oregon.items.append(diamond_boots)
 Oregon.items.append(iron_chestplate)
 Mexico.north = Antioch
-Mexico.items.append(orc)
+Mexico.items.append(ogor)
 Antioch.east = DailyCity
 DailyCity.south = Clovis
 Clovis.east = Selma
@@ -331,7 +331,7 @@ while playing:
         print(item.name)
         if jemi.current_location == Mexico:
             print("An enemy is in this room fight or flee.")
-            orc.attack(jemi)
+            ogor.attack(jemi)
 
     command = input(">_")
 
@@ -368,16 +368,16 @@ while playing:
     elif "drop" in command:
         item_name = command[4:]
 
-        found_item = None
         for item in jemi.inventory:
             if item.name == item_name:
                 found_item = item
 
-            if found_item is None:
-                print("You don't have that")
-            else:
-                print("You have dropped %s" % found_item)
-                jemi.inventory.remove(found_item)
-                jemi.current_location.items.append(found_item)
+        if item is None:
+            print("You don't have that")
+
+        else:
+            print("You have dropped %s" % item)
+            jemi.inventory.remove(item)
+            jemi.current_location.items.append(item)
     else:
         print("Not recognized.")
