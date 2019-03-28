@@ -366,18 +366,19 @@ while playing:
             print("You pick up the %s" % found_item.name)
 
     elif "drop" in command:
-        item_name = command[4:]
+        item_name = command[5:]
 
+        found_item = None
         for item in jemi.inventory:
             if item.name == item_name:
                 found_item = item
 
-        if item is None:
+        if found_item is None:
             print("You don't have that")
 
         else:
-            print("You have dropped %s" % item)
-            jemi.inventory.remove(item)
-            jemi.current_location.items.append(item)
+            print("You have dropped %s" % found_item.name)
+            jemi.inventory.remove(found_item)
+            jemi.current_location.items.append(found_item)
     else:
         print("Not recognized.")
