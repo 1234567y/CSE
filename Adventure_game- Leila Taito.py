@@ -207,6 +207,7 @@ class Character(object):
         self.name = name
         self.health = health
         self.weapon = weapon
+        self.armor1 = [helmet, chestplate, pants, boots]
         self.armor = helmet
         self.armor = chestplate
         self.armor = pants
@@ -229,7 +230,7 @@ class Character(object):
 
 class Player(Character):
     def __init__(self, starting_location):
-        super(Player, self).__init__("Jemi", 100, None, chain_helmet, chain_chestplate, chain_pants, chain_boots)
+        super(Player, self).__init__("Jemi", 100, None, chain_helmet, chain_pants, chain_chestplate, chain_boots)
         self.health = 100
         self.inventory = []
         self.current_location = starting_location
@@ -300,12 +301,17 @@ SanFransisco.items.append(chain_boots)
 SanFransisco.items.append(diamond_chestplate)
 Washington.west = Oregon
 Washington.items.append(chain_chestplate)
+Washington.items.append(chain_boots)
 Oregon.south = Mexico
 Oregon.items.append(diamond_boots)
 Oregon.items.append(iron_chestplate)
+Oregon.items.append(diamond_pants)
 Mexico.north = Antioch
 Mexico.items.append(ogor)
+Mexico.items.append(Treasure1)
 Antioch.east = DailyCity
+Antioch.items.append(ogor)
+Antioch.items.append(Treasure2)
 DailyCity.south = Clovis
 Clovis.east = Selma
 Selma.north = Hanford
@@ -325,6 +331,9 @@ playing = True
 while playing:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
+    print("Jemi's health is %s" % jemi.health)
+    print("Jemi's armor is %s" % jemi.armor1)
+    print("Jemi has %s" % jemi.weapon)
 
     for item in jemi.current_location.items:
         print("Jemi is in %s" % jemi.current_location.name)
