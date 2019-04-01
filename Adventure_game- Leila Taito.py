@@ -207,17 +207,16 @@ class Character(object):
         self.name = name
         self.health = health
         self.weapon = weapon
-        self.armor1 = [helmet, chestplate, pants, boots]
-        self.armor = helmet
-        self.armor = chestplate
-        self.armor = pants
-        self.armor = boots
+        self.helm_armor = helmet
+        self.ches_armor = chestplate
+        self.pants_armor = pants
+        self.boots_armor = boots
 
     def take_damage(self, damage):
-        if damage < self.armor.durability:
+        if damage < self.helm_armor.durability + self.ches_armor + self.pants_armor + self.boots_armor:
             print("No damage is done because of some fabulous armor!")
         else:
-            self.health -= damage - self.armor.durability
+            self.health -= damage - self.helm_armor.durability + self.ches_armor + self.pants_armor + self.boots_armor
             if self.health < 0:
                 self.health = 0
                 print("%s has fallen" % self.name)
@@ -230,9 +229,9 @@ class Character(object):
 
 class Player(Character):
     def __init__(self, starting_location):
-        super(Player, self).__init__("Jemi", 100, None, chain_helmet, chain_pants, chain_chestplate, chain_boots)
+        super(Player, self).__init__("Jemi", 100, None, chain_helmet, chain_chestplate, chain_pants, chain_boots)
         self.health = 100
-        self.inventory = []
+        self.inventory = [self.helm_armor, self.ches_armor, self.pants_armor, self.boots_armor]
         self.current_location = starting_location
 
     def move(self, new_location):
@@ -332,7 +331,10 @@ while playing:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
     print("Jemi's health is %s" % jemi.health)
-    print("Jemi's armor is %s" % jemi.armor1)
+    print("Jemi's helmet is %s" % jemi.helm_armor.name)
+    print("Jemi's chest plate is %s" % jemi.ches_armor.name)
+    print("Jemi's pants is %s" % jemi.pants_armor.name)
+    print("Jemi's boots is %s" % jemi.boots_armor.name)
     print("Jemi has %s" % jemi.weapon)
 
     for item in jemi.current_location.items:
