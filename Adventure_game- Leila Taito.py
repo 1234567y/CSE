@@ -229,7 +229,7 @@ class Character(object):
 
 class Player(Character):
     def __init__(self, starting_location):
-        super(Player, self).__init__("Jemi", 100, None, chain_helmet, chain_chestplate, chain_pants, chain_boots)
+        super(Player, self).__init__("Jemi", 100, None, None, None, None, None)
         self.health = 100
         self.inventory = [self.helm_armor, self.ches_armor, self.pants_armor, self.boots_armor]
         self.current_location = starting_location
@@ -330,12 +330,6 @@ playing = True
 while playing:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
-    print("Jemi's health is %s" % jemi.health)
-    print("Jemi's helmet is %s" % jemi.helm_armor.name)
-    print("Jemi's chest plate is %s" % jemi.ches_armor.name)
-    print("Jemi's pants is %s" % jemi.pants_armor.name)
-    print("Jemi's boots is %s" % jemi.boots_armor.name)
-    print("Jemi has %s" % jemi.weapon)
 
     for item in jemi.current_location.items:
         print("Jemi is in %s" % jemi.current_location.name)
@@ -368,13 +362,17 @@ while playing:
         for item in jemi.current_location.items:
             if item.name == item_name:
                 found_item = item
-
         if found_item is None:
             print("I don't see one")
+
         else:
+            if jemi.helm_armor is None:
+                if found_item is (diamond_helmet, chain_helmet, iron_helmet, leather_helmet):
+                    jemi.helm_armor.append(found_item)
             jemi.inventory.append(found_item)
             jemi.current_location.items.remove(found_item)
             print("You pick up the %s" % found_item.name)
+            print("Jemi's helmet is %s" % jemi.helm_armor)
 
     elif "drop" in command:
         item_name = command[5:]
@@ -386,6 +384,10 @@ while playing:
 
         if found_item is None:
             print("You don't have that")
+
+        if jemi.helm_armor is (chain_helmet, diamond_helmet, iron_helmet, leather_helmet):
+            jemi.helm_armor.append(None.name)
+            print("Jemi has %s" % jemi.helm_armor.name)
 
         else:
             print("You have dropped %s" % found_item.name)
