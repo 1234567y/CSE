@@ -362,16 +362,17 @@ while playing:
         for item in jemi.current_location.items:
             if item.name == item_name:
                 found_item = item
+
         if found_item is None:
             print("I don't see one")
 
         else:
             if jemi.helm_armor is None:
-                if found_item is (diamond_helmet, chain_helmet, iron_helmet, leather_helmet):
-                    jemi.helm_armor.append(found_item)
+                if found_item in [diamond_helmet, chain_helmet, iron_helmet, leather_helmet]:
+                    jemi.helm_armor = found_item.name
             jemi.inventory.append(found_item)
             jemi.current_location.items.remove(found_item)
-            print("You pick up the %s" % found_item.name)
+            print("You picked up the %s" % found_item.name)
             print("Jemi's helmet is %s" % jemi.helm_armor)
 
     elif "drop" in command:
@@ -385,11 +386,11 @@ while playing:
         if found_item is None:
             print("You don't have that")
 
-        if jemi.helm_armor is (chain_helmet, diamond_helmet, iron_helmet, leather_helmet):
-            jemi.helm_armor.append(None.name)
-            print("Jemi has %s" % jemi.helm_armor.name)
-
         else:
+            if jemi.helm_armor is (chain_helmet, diamond_helmet, iron_helmet, leather_helmet):
+                if found_item in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
+                    jemi.helm_armor = None
+                    print("Jemi has no helmet")
             print("You have dropped %s" % found_item.name)
             jemi.inventory.remove(found_item)
             jemi.current_location.items.append(found_item)
