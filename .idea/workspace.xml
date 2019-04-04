@@ -12,7 +12,7 @@
     <SUITE FILE_PATH="coverage/CSE$Items_Leila_Taito.coverage" NAME="Items-Leila Taito Coverage Results" MODIFIED="1552083255672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$Dictionary_Leila_Taito.coverage" NAME="Dictionary-Leila Taito Coverage Results" MODIFIED="1548713035575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$Dictionary_World_Map_LeilaTaito.coverage" NAME="Dictionary_World_Map-LeilaTaito Coverage Results" MODIFIED="1549577636302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/CSE$Adventure_game__Leila_Taito.coverage" NAME="Adventure_game- Leila Taito Coverage Results" MODIFIED="1554327059299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CSE$Adventure_game__Leila_Taito.coverage" NAME="Adventure_game- Leila Taito Coverage Results" MODIFIED="1554413554019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$oBJECT_nOTES.coverage" NAME="oBJECT nOTES Coverage Results" MODIFIED="1550615154661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$HangMan__Leila_Taito.coverage" NAME="HangMan- Leila_Taito Coverage Results" MODIFIED="1548454917764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$Adventure_game___Leila_Taito.coverage" NAME="Adventure game - Leila Taito Coverage Results" MODIFIED="1549576986868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -42,7 +42,7 @@
     <session id="-1411826123">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="57" />
+          <entry key="project.closed" value="58" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.147" value="1" />
@@ -69,6 +69,7 @@
           <entry key="project.open.time.65" value="2" />
           <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.67" value="1" />
+          <entry key="project.open.time.70" value="1" />
           <entry key="project.open.time.71" value="2" />
           <entry key="project.open.time.73" value="1" />
           <entry key="project.open.time.74" value="1" />
@@ -80,7 +81,7 @@
           <entry key="project.open.time.87" value="1" />
           <entry key="project.open.time.88" value="1" />
           <entry key="project.open.time.93" value="1" />
-          <entry key="project.opened" value="58" />
+          <entry key="project.opened" value="59" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -96,13 +97,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="64220" />
+          <entry key="py" value="64283" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="64220" />
+          <entry key="Python" value="64283" />
         </counts>
       </usages-collector>
     </session>
@@ -124,13 +125,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Adventure_game- Leila Taito.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="382" selection-start-line="382" selection-end-line="382" />
+            <state relative-caret-position="256">
+              <caret line="390" column="92" selection-start-line="390" selection-start-column="92" selection-end-line="390" selection-end-column="92" />
               <folding>
-                <marker date="1554327059174" expanded="true" signature="19:24" ph="..." />
-                <marker date="1554327059174" expanded="true" signature="414:416" ph="..." />
-                <marker date="1554327059174" expanded="true" signature="925:1090" ph="..." />
-                <marker date="1554327059174" expanded="true" signature="6884:6890" ph="..." />
+                <marker date="1554413553925" expanded="true" signature="19:24" ph="..." />
+                <marker date="1554413553925" expanded="true" signature="414:416" ph="..." />
+                <marker date="1554413553925" expanded="true" signature="925:1090" ph="..." />
+                <marker date="1554413553925" expanded="true" signature="6816:6822" ph="..." />
               </folding>
             </state>
           </provider>
@@ -249,7 +250,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -422,7 +423,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836066" weight="0.28668684" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24962178" />
@@ -600,13 +600,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Adventure_game- Leila Taito.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="382" selection-start-line="382" selection-end-line="382" />
+        <state relative-caret-position="256">
+          <caret line="390" column="92" selection-start-line="390" selection-start-column="92" selection-end-line="390" selection-end-column="92" />
           <folding>
-            <marker date="1554327059174" expanded="true" signature="19:24" ph="..." />
-            <marker date="1554327059174" expanded="true" signature="414:416" ph="..." />
-            <marker date="1554327059174" expanded="true" signature="925:1090" ph="..." />
-            <marker date="1554327059174" expanded="true" signature="6884:6890" ph="..." />
+            <marker date="1554413553925" expanded="true" signature="19:24" ph="..." />
+            <marker date="1554413553925" expanded="true" signature="414:416" ph="..." />
+            <marker date="1554413553925" expanded="true" signature="925:1090" ph="..." />
+            <marker date="1554413553925" expanded="true" signature="6816:6822" ph="..." />
           </folding>
         </state>
       </provider>

@@ -231,7 +231,7 @@ class Player(Character):
     def __init__(self, starting_location):
         super(Player, self).__init__("Jemi", 100, None, None, None, None, None)
         self.health = 100
-        self.inventory = [self.helm_armor, self.ches_armor, self.pants_armor, self.boots_armor]
+        self.inventory = []
         self.current_location = starting_location
 
     def move(self, new_location):
@@ -373,12 +373,13 @@ while playing:
             jemi.inventory.append(found_item)
             jemi.current_location.items.remove(found_item)
             print("You picked up the %s" % found_item.name)
-            print("Jemi's helmet is %s" % jemi.helm_armor)
+            print("Jemi's helmet is the %s" % jemi.helm_armor)
 
     elif "drop" in command:
         item_name = command[5:]
 
         found_item = None
+        # print(jemi.inventory)
         for item in jemi.inventory:
             if item.name == item_name:
                 found_item = item
@@ -387,12 +388,12 @@ while playing:
             print("You don't have that")
 
         else:
-            if jemi.helm_armor is (chain_helmet, diamond_helmet, iron_helmet, leather_helmet):
+            if jemi.helm_armor in (chain_helmet, diamond_helmet, iron_helmet, leather_helmet):
                 if found_item in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
                     jemi.helm_armor = None
-                    print("Jemi has no helmet")
-            print("You have dropped %s" % found_item.name)
             jemi.inventory.remove(found_item)
             jemi.current_location.items.append(found_item)
+            print("You have dropped %s" % found_item.name)
+            print("Jemi helmet is %s" % jemi.helm_armor)
     else:
         print("Not recognized.")
