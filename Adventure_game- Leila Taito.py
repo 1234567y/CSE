@@ -203,23 +203,31 @@ class ChainB(Boots):
 
 
 class DefaultH(Helmet):
-    def __init__(self, name):
+    def __init__(self, name, description, durability=0):
         super(DefaultH, self).__init__(name)
+        self.durability = durability
+        self.description = description
 
 
 class DefaultC(Chestplate):
-    def __init__(self, name):
+    def __init__(self, name, description, durability=0):
         super(DefaultC, self).__init__(name)
+        self.durability = durability
+        self.description = description
 
 
 class DefaultP(Pants):
-    def __init__(self, name):
+    def __init__(self, name, description, durability=0):
         super(DefaultP, self).__init__(name)
+        self.durability = durability
+        self.description = description
 
 
 class DefaultB(Boots):
-    def __init__(self, name):
+    def __init__(self, name, description, durability=0):
         super(DefaultB, self).__init__(name)
+        self.durability = durability
+        self.description = description
 
 
 class Character(object):
@@ -249,7 +257,10 @@ class Character(object):
 
 class Player(Character):
     def __init__(self, starting_location):
-        super(Player, self).__init__("Jemi", 100, None, DefaultH, DefaultC, DefaultP, DefaultB)
+        super(Player, self).__init__("Jemi", 100, None, DefaultH("hat", "This is the default clothing"),
+                                     DefaultC("shirt", "This is the default clothing"),
+                                     DefaultP("pants", "This is the default clothing"),
+                                     DefaultB("boots", "This is the default clothing"))
         self.health = 100
         self.inventory = []
         self.current_location = starting_location
@@ -283,10 +294,7 @@ diamond_boots = DiamondB("diamond boots", "This is boots")
 iron_boots = IronB("iron boots", "This is boots")
 chain_boots = ChainB("chain boots", "This is boots")
 leather_boots = LeatherB("leather boots", "This is boots")
-default_helmet = DefaultH("hat")
-default_chestplate = DefaultC("shirt")
-default_pants = DefaultP("pants")
-default_boots = DefaultB("sneakers")
+
 
 # Character set up
 ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
@@ -346,8 +354,8 @@ Riverdale.items.append(treasure)
 
 jemi = Player(Fresno)
 
-directions = ['north', 'south', 'east', 'west', 'pick up', 'attack orc', 'drop']
-
+directions = ['north', 'south', 'east', 'west', 'pick up', 'drop']
+short_directions = ['n', 's', 'e', 'w']
 playing = True
 
 # Controller
@@ -363,6 +371,10 @@ while playing:
             ogor.attack(jemi)
 
     command = input(">_")
+
+    if command in short_directions:
+        pos = short_directions.index(command)
+        command = directions[pos]
 
     if command in directions:
 
@@ -398,11 +410,21 @@ while playing:
             if jemi.ches_armor is DefaultC:
                 if found_item in [diamond_chestplate, chain_chestplate, iron_chestplate, leather_chestplate]:
                     jemi.ches_armor = found_item
+
+            if jemi.pants_armor is DefaultP:
+                if found_item in [diamond_pants, iron_pants, leather_pants, chain_pants]:
+                    jemi.pants_armor = found_item
+
+            if jemi.boots_armor is DefaultB:
+                if found_item in [diamond_boots, iron_boots, leather_boots, chain_boots]:
+                    jemi.boots_armor = found_item
             jemi.inventory.append(found_item)
             jemi.current_location.items.remove(found_item)
             print("You picked up the %s" % found_item.name)
             print("Jemi's helmet is the %s" % jemi.helm_armor.name)
             print("Jemi's chest plate is %s" % jemi.ches_armor.name)
+            print("Jemi's pants is %s" % jemi.pants_armor.name)
+            print("Jemi's shoes is %s" % jemi.boots_armor.name)
 
     elif "drop" in command:
         item_name = command[5:]
@@ -419,10 +441,25 @@ while playing:
         else:
             if jemi.helm_armor in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
                 if found_item in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
-                    jemi.helm_armor = None
+                    jemi.helm_armor = DefaultH
+
+            if jemi.ches_armor in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
+                if found_item in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
+                    jemi.ches_armor = DefaultC
+
+            if jemi.pants_armor in [chain_pants, iron_pants, diamond_pants, leather_pants]:
+                if found_item in [chain_pants, iron_pants, diamond_pants, leather_pants]:
+                    jemi.pants_armor = DefaultP
+
+            if jemi.boots_armor in [chain_boots, iron_boots, diamond_boots, leather_boots]:
+                if found_item in [chain_boots, iron_boots, diamond_boots, leather_boots]:
+                    jemi.boots_armor = DefaultB
             jemi.inventory.remove(found_item)
             jemi.current_location.items.append(found_item)
             print("You have dropped %s" % found_item.name)
-            print("Jemi helmet is %s" % jemi.helm_armor)
+            print("Jemi's helmet is %s" % jemi.helm_armor.name)
+            print("Jemi's chest plate is %s" % jemi.ches_armor.name)
+            print("Jemi's pants is %s" % jemi.pants_armor.name)
+            print("Jemi's boots is %s" % jemi.boots_armor.name)
     else:
         print("Not recognized.")
