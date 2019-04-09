@@ -41,14 +41,14 @@ class Weapon(Item):
         self.description = description
 
 
-class Sword(Item):
-    def __init__(self, name):
-        super(Sword, self).__init__(name)
+class Sword(Weapon):
+    def __init__(self, name, description, damage):
+        super(Sword, self).__init__(name, description, damage)
 
 
 class IronS(Sword):
     def __init__(self, name, description, damage, durability=69):
-        super(IronS, self).__init__(name)
+        super(IronS, self).__init__(name, description, damage)
         self.damage = damage
         self.durability = durability
         self.description = description
@@ -56,7 +56,7 @@ class IronS(Sword):
 
 class DiamondS(Sword):
     def __init__(self, name, description, damage, durability=99, ):
-        super(DiamondS, self).__init__(name)
+        super(DiamondS, self).__init__(name, description, damage)
         self.damage = damage
         self.durability = durability
         self.description = description
@@ -64,7 +64,7 @@ class DiamondS(Sword):
 
 class WoodS(Sword):
     def __init__(self, name, description, damage, durability=11):
-        super(WoodS, self).__init__(name)
+        super(WoodS, self).__init__(name, description, damage)
         self.damage = damage
         self.durability = durability
         self.description = description
@@ -203,30 +203,33 @@ class ChainB(Boots):
 
 
 class DefaultH(Helmet):
-    def __init__(self, name, description, durability=0):
+    def __init__(self, name, durability=0):
         super(DefaultH, self).__init__(name)
         self.durability = durability
-        self.description = description
 
 
 class DefaultC(Chestplate):
-    def __init__(self, name, description, durability=0):
+    def __init__(self, name, durability=0):
         super(DefaultC, self).__init__(name)
         self.durability = durability
-        self.description = description
 
 
 class DefaultP(Pants):
-    def __init__(self, name, description, durability=0):
+    def __init__(self, name, durability=0):
         super(DefaultP, self).__init__(name)
         self.durability = durability
-        self.description = description
 
 
 class DefaultB(Boots):
-    def __init__(self, name, description, durability=0):
+    def __init__(self, name, durability=0):
         super(DefaultB, self).__init__(name)
         self.durability = durability
+
+
+class Hands(Sword):
+    def __init__(self, name, description, damage=2):
+        super(Hands, self).__init__(name, description, damage=2)
+        self.damage = damage
         self.description = description
 
 
@@ -257,10 +260,10 @@ class Character(object):
 
 class Player(Character):
     def __init__(self, starting_location):
-        super(Player, self).__init__("Jemi", 100, None, DefaultH("hat", "This is the default clothing"),
-                                     DefaultC("shirt", "This is the default clothing"),
-                                     DefaultP("pants", "This is the default clothing"),
-                                     DefaultB("boots", "This is the default clothing"))
+        super(Player, self).__init__("Jemi", 100, Hands('hands', 'You have no weapon'), DefaultH("hat"),
+                                     DefaultC("shirt"),
+                                     DefaultP("pants"),
+                                     DefaultB("boots"))
         self.health = 100
         self.inventory = []
         self.current_location = starting_location
@@ -362,6 +365,11 @@ playing = True
 while playing:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
+    print("Jemi's helmet is the %s" % jemi.helm_armor.name)
+    print("Jemi's chest plate is %s" % jemi.ches_armor.name)
+    print("Jemi's pants is %s" % jemi.pants_armor.name)
+    print("Jemi's shoes is %s" % jemi.boots_armor.name)
+    print("Jemi's weapon is %s" % jemi.weapon.name)
 
     for item in jemi.current_location.items:
         print("Jemi is in %s" % jemi.current_location.name)
@@ -403,21 +411,26 @@ while playing:
             print("I don't see one")
 
         else:
-            if jemi.helm_armor is DefaultH:
+            if type(jemi.helm_armor) is DefaultH:
                 if found_item in [diamond_helmet, chain_helmet, iron_helmet, leather_helmet]:
                     jemi.helm_armor = found_item
 
-            if jemi.ches_armor is DefaultC:
+            if type(jemi.ches_armor) is DefaultC:
                 if found_item in [diamond_chestplate, chain_chestplate, iron_chestplate, leather_chestplate]:
                     jemi.ches_armor = found_item
 
-            if jemi.pants_armor is DefaultP:
+            if type(jemi.pants_armor) is DefaultP:
                 if found_item in [diamond_pants, iron_pants, leather_pants, chain_pants]:
                     jemi.pants_armor = found_item
 
-            if jemi.boots_armor is DefaultB:
+            if type(jemi.boots_armor) is DefaultB:
                 if found_item in [diamond_boots, iron_boots, leather_boots, chain_boots]:
                     jemi.boots_armor = found_item
+
+            if type(jemi.weapon) is Hands:
+                if found_item in [wood_sword, diamond_sword, iron_sword]:
+                    jemi.weapon = found_item
+
             jemi.inventory.append(found_item)
             jemi.current_location.items.remove(found_item)
             print("You picked up the %s" % found_item.name)
@@ -425,6 +438,7 @@ while playing:
             print("Jemi's chest plate is %s" % jemi.ches_armor.name)
             print("Jemi's pants is %s" % jemi.pants_armor.name)
             print("Jemi's shoes is %s" % jemi.boots_armor.name)
+            print("Jemi's weapon is %s" % jemi.weapon.name)
 
     elif "drop" in command:
         item_name = command[5:]
@@ -454,6 +468,10 @@ while playing:
             if jemi.boots_armor in [chain_boots, iron_boots, diamond_boots, leather_boots]:
                 if found_item in [chain_boots, iron_boots, diamond_boots, leather_boots]:
                     jemi.boots_armor = DefaultB
+
+            if jemi.weapon in [wood_sword, iron_sword, diamond_sword]:
+                if found_item in [wood_sword, iron_sword, diamond_sword]:
+                    jemi.weapon = Hands('hands', 'You have no weapon')
             jemi.inventory.remove(found_item)
             jemi.current_location.items.append(found_item)
             print("You have dropped %s" % found_item.name)
@@ -461,5 +479,6 @@ while playing:
             print("Jemi's chest plate is %s" % jemi.ches_armor.name)
             print("Jemi's pants is %s" % jemi.pants_armor.name)
             print("Jemi's boots is %s" % jemi.boots_armor.name)
+            print("Jemi's weapon is %s" % jemi.weapon.name)
     else:
         print("Not recognized.")
