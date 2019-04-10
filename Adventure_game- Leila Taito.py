@@ -365,18 +365,20 @@ playing = True
 while playing:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
+    print("Jemi is in %s" % jemi.current_location.name)
+    print("You're commands are n, e, s, w, pick up, drop")
+
+    for item in jemi.current_location.items:
+        print(item.name)
+        if jemi.current_location == Mexico:
+            print("An enemy is in this room fight or flee.")
+            ogor.attack(jemi)
+
     print("Jemi's helmet is the %s" % jemi.helm_armor.name)
     print("Jemi's chest plate is %s" % jemi.ches_armor.name)
     print("Jemi's pants is %s" % jemi.pants_armor.name)
     print("Jemi's shoes is %s" % jemi.boots_armor.name)
     print("Jemi's weapon is %s" % jemi.weapon.name)
-
-    for item in jemi.current_location.items:
-        print("Jemi is in %s" % jemi.current_location.name)
-        print(item.name)
-        if jemi.current_location == Mexico:
-            print("An enemy is in this room fight or flee.")
-            ogor.attack(jemi)
 
     command = input(">_")
 
@@ -453,19 +455,19 @@ while playing:
             print("You don't have that")
 
         else:
-            if jemi.helm_armor in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
+            if type(jemi.helm_armor) in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
                 if found_item in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
-                    jemi.helm_armor = DefaultH
+                    jemi.helm_armor = DefaultH('hat')
 
-            if jemi.ches_armor in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
+            if type(jemi.ches_armor) in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
                 if found_item in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
                     jemi.ches_armor = DefaultC
 
-            if jemi.pants_armor in [chain_pants, iron_pants, diamond_pants, leather_pants]:
+            if type(jemi.pants_armor) in [chain_pants, iron_pants, diamond_pants, leather_pants]:
                 if found_item in [chain_pants, iron_pants, diamond_pants, leather_pants]:
                     jemi.pants_armor = DefaultP
 
-            if jemi.boots_armor in [chain_boots, iron_boots, diamond_boots, leather_boots]:
+            if type(jemi.boots_armor) in [chain_boots, iron_boots, diamond_boots, leather_boots]:
                 if found_item in [chain_boots, iron_boots, diamond_boots, leather_boots]:
                     jemi.boots_armor = DefaultB
 
