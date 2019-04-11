@@ -12,7 +12,7 @@
     <SUITE FILE_PATH="coverage/CSE$Items_Leila_Taito.coverage" NAME="Items-Leila Taito Coverage Results" MODIFIED="1552083255672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$Dictionary_Leila_Taito.coverage" NAME="Dictionary-Leila Taito Coverage Results" MODIFIED="1548713035575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$Dictionary_World_Map_LeilaTaito.coverage" NAME="Dictionary_World_Map-LeilaTaito Coverage Results" MODIFIED="1549577636302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/CSE$Adventure_game__Leila_Taito.coverage" NAME="Adventure_game- Leila Taito Coverage Results" MODIFIED="1554931652713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CSE$Adventure_game__Leila_Taito.coverage" NAME="Adventure_game- Leila Taito Coverage Results" MODIFIED="1555018515638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$oBJECT_nOTES.coverage" NAME="oBJECT nOTES Coverage Results" MODIFIED="1550615154661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$HangMan__Leila_Taito.coverage" NAME="HangMan- Leila_Taito Coverage Results" MODIFIED="1548454917764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CSE$Adventure_game___Leila_Taito.coverage" NAME="Adventure game - Leila Taito Coverage Results" MODIFIED="1549576986868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -42,7 +42,7 @@
     <session id="-1411826123">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="62" />
+          <entry key="project.closed" value="63" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.147" value="1" />
@@ -65,7 +65,7 @@
           <entry key="project.open.time.59" value="1" />
           <entry key="project.open.time.61" value="2" />
           <entry key="project.open.time.62" value="1" />
-          <entry key="project.open.time.63" value="1" />
+          <entry key="project.open.time.63" value="2" />
           <entry key="project.open.time.64" value="1" />
           <entry key="project.open.time.65" value="2" />
           <entry key="project.open.time.66" value="1" />
@@ -83,7 +83,7 @@
           <entry key="project.open.time.87" value="1" />
           <entry key="project.open.time.88" value="1" />
           <entry key="project.open.time.93" value="1" />
-          <entry key="project.opened" value="63" />
+          <entry key="project.opened" value="64" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -100,13 +100,13 @@
         <counts>
           <entry key="Python Console" value="1" />
           <entry key="dummy" value="5" />
-          <entry key="py" value="74240" />
+          <entry key="py" value="75187" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="74241" />
+          <entry key="Python" value="75188" />
         </counts>
       </usages-collector>
     </session>
@@ -128,16 +128,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Adventure_game- Leila Taito.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3981">
-              <caret line="66" column="62" lean-forward="true" selection-start-line="66" selection-start-column="62" selection-end-line="66" selection-end-column="62" />
+            <state relative-caret-position="415">
+              <caret line="494" column="73" lean-forward="true" selection-start-line="494" selection-start-column="73" selection-end-line="494" selection-end-column="73" />
               <folding>
-                <marker date="1554931827341" expanded="true" signature="19:24" ph="..." />
-                <marker date="1554931827341" expanded="true" signature="414:416" ph="..." />
-                <marker date="1554931827341" expanded="true" signature="925:1090" ph="..." />
-                <marker date="1554931827341" expanded="true" signature="5674:5803" ph="..." />
-                <marker date="1554931827341" expanded="true" signature="6132:6469" ph="..." />
-                <marker date="1554931827341" expanded="true" signature="6280:6469" ph="..." />
-                <marker date="1554931827341" expanded="true" signature="7934:7940" ph="..." />
+                <marker date="1555018483529" expanded="true" signature="19:24" ph="..." />
+                <marker date="1555018483529" expanded="true" signature="414:416" ph="..." />
+                <marker date="1555018483529" expanded="true" signature="925:1139" ph="..." />
+                <marker date="1555018483529" expanded="true" signature="5781:5910" ph="..." />
+                <marker date="1555018483529" expanded="true" signature="6239:6596" ph="..." />
+                <marker date="1555018483529" expanded="true" signature="6387:6596" ph="..." />
+                <marker date="1555018483529" expanded="true" signature="8167:8173" ph="..." />
               </folding>
             </state>
           </provider>
@@ -263,7 +263,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -442,11 +442,9 @@
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26065573" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.101639345" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -455,12 +453,14 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3295082" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="SciView" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="SciView" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,16 +605,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Adventure_game- Leila Taito.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3981">
-          <caret line="66" column="62" lean-forward="true" selection-start-line="66" selection-start-column="62" selection-end-line="66" selection-end-column="62" />
+        <state relative-caret-position="415">
+          <caret line="494" column="73" lean-forward="true" selection-start-line="494" selection-start-column="73" selection-end-line="494" selection-end-column="73" />
           <folding>
-            <marker date="1554931827341" expanded="true" signature="19:24" ph="..." />
-            <marker date="1554931827341" expanded="true" signature="414:416" ph="..." />
-            <marker date="1554931827341" expanded="true" signature="925:1090" ph="..." />
-            <marker date="1554931827341" expanded="true" signature="5674:5803" ph="..." />
-            <marker date="1554931827341" expanded="true" signature="6132:6469" ph="..." />
-            <marker date="1554931827341" expanded="true" signature="6280:6469" ph="..." />
-            <marker date="1554931827341" expanded="true" signature="7934:7940" ph="..." />
+            <marker date="1555018483529" expanded="true" signature="19:24" ph="..." />
+            <marker date="1555018483529" expanded="true" signature="414:416" ph="..." />
+            <marker date="1555018483529" expanded="true" signature="925:1139" ph="..." />
+            <marker date="1555018483529" expanded="true" signature="5781:5910" ph="..." />
+            <marker date="1555018483529" expanded="true" signature="6239:6596" ph="..." />
+            <marker date="1555018483529" expanded="true" signature="6387:6596" ph="..." />
+            <marker date="1555018483529" expanded="true" signature="8167:8173" ph="..." />
           </folding>
         </state>
       </provider>

@@ -35,28 +35,29 @@ class Treasure2(Treasure):
 
 
 class Weapon(Item):
-    def __init__(self, name, description, damage):
+    def __init__(self, name, description, damage, durability):
         super(Weapon, self).__init__(name)
         self.damage = damage
         self.description = description
+        self.durability = durability
 
 
 class Sword(Weapon):
-    def __init__(self, name, description, damage):
-        super(Sword, self).__init__(name, description, damage)
+    def __init__(self, name, description, damage, durability):
+        super(Sword, self).__init__(name, description, damage, durability)
 
 
 class IronS(Sword):
     def __init__(self, name, description, damage, durability=69):
-        super(IronS, self).__init__(name, description, damage)
+        super(IronS, self).__init__(name, description, damage, durability)
         self.damage = damage
         self.durability = durability
         self.description = description
 
 
 class DiamondS(Sword):
-    def __init__(self, name, description, damage, durability=99, ):
-        super(DiamondS, self).__init__(name, description, damage)
+    def __init__(self, name, description, damage, durability=99):
+        super(DiamondS, self).__init__(name, description, damage, durability)
         self.damage = damage
         self.durability = durability
         self.description = description
@@ -64,7 +65,7 @@ class DiamondS(Sword):
 
 class WoodS(Sword):
     def __init__(self, name, description, damage, durability=11):
-        super(WoodS, self).__init__(name, description, damage)
+        super(WoodS, self).__init__(name, description, damage, durability)
         self.damage = damage
         self.durability = durability
         self.description = description
@@ -227,8 +228,8 @@ class DefaultB(Boots):
 
 
 class Hands(Sword):
-    def __init__(self, name, description, damage=2):
-        super(Hands, self).__init__(name, description, damage=2)
+    def __init__(self, name, description, damage, durability):
+        super(Hands, self).__init__(name, description, damage, durability)
         self.damage = damage
         self.description = description
 
@@ -244,10 +245,12 @@ class Character(object):
         self.boots_armor = boots
 
     def take_damage(self, damage):
-        if damage < self.helm_armor.durability + self.ches_armor + self.pants_armor + self.boots_armor:
+        if damage < self.helm_armor.strength + self.ches_armor.strength + self.pants_armor.strength + \
+                self.boots_armor.strenth:
             print("No damage is done because of some fabulous armor!")
         else:
-            self.health -= damage - self.helm_armor.durability + self.ches_armor + self.pants_armor + self.boots_armor
+            self.health -= damage - self.helm_armor.strength + self.ches_armor.strength + self.pants_armor.strength + \
+                           self.boots_armor.strength
             if self.health < 0:
                 self.health = 0
                 print("%s has fallen" % self.name)
@@ -255,12 +258,12 @@ class Character(object):
 
     def attack(self, target):
         print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
-        target.take_damage(self.weapon.damage)
+        target.take_damage(self.weapon.durability)
 
 
 class Player(Character):
     def __init__(self, starting_location):
-        super(Player, self).__init__("Jemi", 100, Hands('hands', 'You have no weapon'), DefaultH("hat"),
+        super(Player, self).__init__("Jemi", 100, Hands('hands', 'You have no weapon', 2, 0), DefaultH("hat"),
                                      DefaultC("shirt"),
                                      DefaultP("pants"),
                                      DefaultB("boots"))
@@ -303,20 +306,20 @@ leather_boots = LeatherB("leather boots", "This is boots")
 ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
 
 # Rooms
-Fresno = Room("Fresno", "Leads to another room", None, None, None, None)
-Kerman = Room("Kerman", "Leads to another room", None, Fresno, None, None)
-LA = Room("LA", "Leads to another room", Kerman, None, None, None)
-SanFransisco = Room("SanFransisco", "Leads to another room", None, None, None, LA)
-Washington = Room("Washington", "Leads to another room", None, None, SanFransisco, None)
-Oregon = Room("Oregon", "Leads to another room", None, Washington, None, None)
-Mexico = Room("Mexico", "Leads to another room", None, None, None, Oregon)
-Antioch = Room("Antioch", "Leads to another room", Mexico, None, None, None)
-DailyCity = Room("DailyCity", "Leads to another room", None, None, Antioch, None)
-Clovis = Room("Clovis", "Leads to another room", None, None, None, DailyCity)
-Selma = Room("Selma", "Leads to another room", None, None, Clovis, None)
-Hanford = Room("Hanford", "Leads to another room", Selma, None, None, None)
-Dinuba = Room("Dinuba", "Leads to another room", None, Hanford, None, None)
-Madera = Room("Madera", "Leads to another room", None, None, None, Dinuba)
+Fresno = Room("Fresno", None, "You start in Fresno. Pick which weapon you want", None, None, None)
+Kerman = Room("Kerman", None, "This is the second room there should be some armor", Fresno, None, None)
+LA = Room("LA", Kerman, "Leads to another room", None, None, None)
+SanFransisco = Room("SanFransisco", None, "Leads to another room", None, None, LA)
+Washington = Room("Washington", None, "Leads to another room", None, SanFransisco, None)
+Oregon = Room("Oregon", None, "Leads to another room", Washington, None, None)
+Mexico = Room("Mexico", None, "Leads to another room", None, None, Oregon)
+Antioch = Room("Antioch", Mexico, "Leads to another room", None, None, None)
+DailyCity = Room("DailyCity", None, "Leads to another room", None, Antioch, None)
+Clovis = Room("Clovis", None, "Leads to another room", None, None, DailyCity)
+Selma = Room("Selma", None, "Leads to another room", None, Clovis, None)
+Hanford = Room("Hanford", Selma, "Leads to another room", None, None, None)
+Dinuba = Room("Dinuba", None, "Leads to another room", Hanford, None, None)
+Madera = Room("Madera", None, "Leads to another room", None, None, Dinuba)
 Riverdale = Room("Riverdale", "Leads to another room", Fresno, Madera, None, None)
 
 # Defining
@@ -357,7 +360,7 @@ Riverdale.items.append(treasure)
 
 jemi = Player(Fresno)
 
-directions = ['north', 'south', 'east', 'west', 'pick up', 'drop']
+directions = ['north', 'south', 'east', 'west', 'pick up', 'drop', 'attack ogor']
 short_directions = ['n', 's', 'e', 'w']
 playing = True
 
@@ -366,7 +369,7 @@ while playing:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
     print("Jemi is in %s" % jemi.current_location.name)
-    print("You're commands are n, e, s, w, pick up, drop")
+    print("You're commands are n, e, s, w, pick up, drop, attack ogor")
 
     for item in jemi.current_location.items:
         print(item.name)
@@ -441,12 +444,29 @@ while playing:
             print("Jemi's pants is %s" % jemi.pants_armor.name)
             print("Jemi's shoes is %s" % jemi.boots_armor.name)
             print("Jemi's weapon is %s" % jemi.weapon.name)
+            print("Your power is %s" % jemi.weapon.damage)
+            strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability
+            strength2 = jemi.pants_armor.durability + jemi.boots_armor.durability
+            Overall = strength1 + strength2
+            print("Your strength is %s" % Overall)
 
     elif "drop" in command:
         item_name = command[5:]
 
         found_item = None
         # print(jemi.inventory)
+        if ogor in jemi.current_location:
+            os = ogor.helm_armor.durability + ogor.ches_armor.durability
+            os2 = ogor.pants_armor.durability + ogor.boots_armor.durability
+            ov = os + os2
+            print("There is an enemy here. The enemies power is %s" % ogor.weapon.damage)
+            print("The enemy's strength is %s" % ov)
+            if "attack ogor" in command:
+                if ov > jemi.weapon.damage:
+                    ov -= jemi.weapon.damage
+                else:
+                    ogor.health -= jemi.weapon.damage
+
         for item in jemi.inventory:
             if item.name == item_name:
                 found_item = item
@@ -455,25 +475,25 @@ while playing:
             print("You don't have that")
 
         else:
-            if type(jemi.helm_armor) in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
+            if jemi.helm_armor in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
                 if found_item in [chain_helmet, diamond_helmet, iron_helmet, leather_helmet]:
-                    jemi.helm_armor = DefaultH('hat')
+                    jemi.helm_armor = DefaultH("hat")
 
-            if type(jemi.ches_armor) in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
+            if jemi.ches_armor in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
                 if found_item in [chain_chestplate, iron_chestplate, diamond_chestplate, leather_chestplate]:
-                    jemi.ches_armor = DefaultC
+                    jemi.ches_armor = DefaultC("shirt")
 
-            if type(jemi.pants_armor) in [chain_pants, iron_pants, diamond_pants, leather_pants]:
+            if jemi.pants_armor in [chain_pants, iron_pants, diamond_pants, leather_pants]:
                 if found_item in [chain_pants, iron_pants, diamond_pants, leather_pants]:
-                    jemi.pants_armor = DefaultP
+                    jemi.pants_armor = DefaultP("pants")
 
-            if type(jemi.boots_armor) in [chain_boots, iron_boots, diamond_boots, leather_boots]:
+            if jemi.boots_armor in [chain_boots, iron_boots, diamond_boots, leather_boots]:
                 if found_item in [chain_boots, iron_boots, diamond_boots, leather_boots]:
-                    jemi.boots_armor = DefaultB
+                    jemi.boots_armor = DefaultB("boots")
 
             if jemi.weapon in [wood_sword, iron_sword, diamond_sword]:
                 if found_item in [wood_sword, iron_sword, diamond_sword]:
-                    jemi.weapon = Hands('hands', 'You have no weapon')
+                    jemi.weapon = Hands('hands', 'You have no weapon', 2, 0)
             jemi.inventory.remove(found_item)
             jemi.current_location.items.append(found_item)
             print("You have dropped %s" % found_item.name)
@@ -482,5 +502,11 @@ while playing:
             print("Jemi's pants is %s" % jemi.pants_armor.name)
             print("Jemi's boots is %s" % jemi.boots_armor.name)
             print("Jemi's weapon is %s" % jemi.weapon.name)
+            print("Your power is %s" % jemi.weapon.damage)
+            strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability
+            strength2 = jemi.pants_armor.durability + jemi.boots_armor.durability
+            Overall = strength1 + strength2
+            print("Your strength is %s" % Overall)
+
     else:
         print("Not recognized.")
