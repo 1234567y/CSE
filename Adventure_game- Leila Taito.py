@@ -77,30 +77,30 @@ class Helmet(Item):
 
 
 class Leatherhel(Helmet):
-    def __init__(self, name, description, strength=10):
+    def __init__(self, name, description, durability=10):
         super(Leatherhel, self).__init__(name)
-        self.strength = strength
+        self.durability = durability
         self.description = description
 
 
 class Ironhel(Helmet):
-    def __init__(self, name, description, strength=60):
+    def __init__(self, name, description, durability=60):
         super(Ironhel, self).__init__(name)
-        self.strength = strength
+        self.durability = durability
         self.description = description
 
 
 class Diamondhel(Helmet):
-    def __init__(self, name, description, strength=90):
+    def __init__(self, name, description, durability=90):
         super(Diamondhel, self).__init__(name)
-        self.strength = strength
+        self.durability = durability
         self.description = description
 
 
 class Chainhel(Helmet):
-    def __init__(self, name, description, strength=20):
+    def __init__(self, name, description, durability=20):
         super(Chainhel, self).__init__(name)
-        self.strength = strength
+        self.durability = durability
         self.description = description
 
 
@@ -245,12 +245,12 @@ class Character(object):
         self.boots_armor = boots
 
     def take_damage(self, damage):
-        if damage < self.helm_armor.strength + self.ches_armor.strength + self.pants_armor.strength + \
-                self.boots_armor.strenth:
+        if damage < self.helm_armor.durability + self.ches_armor.durability + self.pants_armor.durability + \
+                self.boots_armor.durability:
             print("No damage is done because of some fabulous armor!")
         else:
-            self.health -= damage - self.helm_armor.strength + self.ches_armor.strength + self.pants_armor.strength + \
-                           self.boots_armor.strength
+            self.health -= damage - self.helm_armor.durability + self.ches_armor.durability + \
+                           self.pants_armor.durability + self.boots_armor.durability
             if self.health < 0:
                 self.health = 0
                 print("%s has fallen" % self.name)
@@ -258,7 +258,7 @@ class Character(object):
 
     def attack(self, target):
         print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
-        target.take_damage(self.weapon.durability)
+        target.take_damage(self.weapon.damage)
 
 
 class Player(Character):
@@ -345,7 +345,7 @@ Oregon.items.append(iron_chestplate)
 Oregon.items.append(diamond_pants)
 Mexico.north = Antioch
 Mexico.items.append(ogor)
-Mexico.items.append(Treasure1)
+Mexico.items.append(treasures)
 Antioch.east = DailyCity
 Antioch.items.append(ogor)
 Antioch.items.append(Treasure2)
@@ -376,6 +376,13 @@ while playing:
         if jemi.current_location == Mexico:
             print("An enemy is in this room fight or flee.")
             ogor.attack(jemi)
+            jemi.attack(ogor)
+            if jemi.health == 0:
+                print("Game Over. You have fallen to the nasty ogor......")
+                quit(0)
+            else:
+                print("You have slain the nasty ogor. Continue")
+                Mexico.items.remove(ogor)
 
     print("Jemi's helmet is the %s" % jemi.helm_armor.name)
     print("Jemi's chest plate is %s" % jemi.ches_armor.name)
@@ -445,9 +452,11 @@ while playing:
             print("Jemi's shoes is %s" % jemi.boots_armor.name)
             print("Jemi's weapon is %s" % jemi.weapon.name)
             print("Your power is %s" % jemi.weapon.damage)
-            strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability
-            strength2 = jemi.pants_armor.durability + jemi.boots_armor.durability
-            Overall = strength1 + strength2
+
+            strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability \
+                        + jemi.pants_armor.durability + jemi.boots_armor.durability
+
+            Overall = strength1
             print("Your strength is %s" % Overall)
 
     elif "drop" in command:
@@ -455,18 +464,6 @@ while playing:
 
         found_item = None
         # print(jemi.inventory)
-        if ogor in jemi.current_location:
-            os = ogor.helm_armor.durability + ogor.ches_armor.durability
-            os2 = ogor.pants_armor.durability + ogor.boots_armor.durability
-            ov = os + os2
-            print("There is an enemy here. The enemies power is %s" % ogor.weapon.damage)
-            print("The enemy's strength is %s" % ov)
-            if "attack ogor" in command:
-                if ov > jemi.weapon.damage:
-                    ov -= jemi.weapon.damage
-                else:
-                    ogor.health -= jemi.weapon.damage
-
         for item in jemi.inventory:
             if item.name == item_name:
                 found_item = item
