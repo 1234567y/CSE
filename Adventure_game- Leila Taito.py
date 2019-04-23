@@ -245,9 +245,15 @@ class Character(object):
         self.boots_armor = boots
 
     def take_damage(self, damage):
-        if damage < self.helm_armor.durability + self.ches_armor.durability + self.pants_armor.durability + \
-                self.boots_armor.durability:
-            print("No damage is done because of some fabulous armor!")
+        if damage < (self.helm_armor.durability, self.ches_armor.durability,  self.pants_armor.durability,
+                     self.boots_armor.durability):
+                print("No damage is done because of some fabulous armor!")
+                self.helm_armor -= damage
+                self.ches_armor -= damage
+                self.pants_armor -= damage
+                self.boots_armor -= damage
+                print("%s armor is at %s" % (self.name, self.helm_armor.durability + self.ches_armor.durability
+                                               + self.pants_armor.durability + self.boots_armor.durability))
         else:
             self.health -= damage - self.helm_armor.durability + self.ches_armor.durability + \
                            self.pants_armor.durability + self.boots_armor.durability
@@ -300,7 +306,6 @@ diamond_boots = DiamondB("diamond boots", "This is boots")
 iron_boots = IronB("iron boots", "This is boots")
 chain_boots = ChainB("chain boots", "This is boots")
 leather_boots = LeatherB("leather boots", "This is boots")
-
 
 # Character set up
 ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
@@ -369,7 +374,10 @@ while playing:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
     print("Jemi is in %s" % jemi.current_location.name)
-    print("You're commands are n, e, s, w, pick up, drop, attack ogor")
+    print("You're commands are n, e, s, w, pick up, drop")
+    strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability
+    strength2 = jemi.pants_armor.durability + jemi.boots_armor.durability
+    Overall = strength1 + strength2
 
     for item in jemi.current_location.items:
         print(item.name)
@@ -389,6 +397,8 @@ while playing:
     print("Jemi's pants is %s" % jemi.pants_armor.name)
     print("Jemi's shoes is %s" % jemi.boots_armor.name)
     print("Jemi's weapon is %s" % jemi.weapon.name)
+    print("Your strength is %s" % Overall)
+    print("Your power is %s" % jemi.weapon.damage)
 
     command = input(">_")
 
