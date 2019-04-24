@@ -245,15 +245,10 @@ class Character(object):
         self.boots_armor = boots
 
     def take_damage(self, damage):
-        if damage < (self.helm_armor.durability, self.ches_armor.durability,  self.pants_armor.durability,
-                     self.boots_armor.durability):
+        if damage < self.helm_armor.durability + self.ches_armor.durability \
+                + self.pants_armor.durability \
+                + self.boots_armor.durability:
                 print("No damage is done because of some fabulous armor!")
-                self.helm_armor -= damage
-                self.ches_armor -= damage
-                self.pants_armor -= damage
-                self.boots_armor -= damage
-                print("%s armor is at %s" % (self.name, self.helm_armor.durability + self.ches_armor.durability
-                                               + self.pants_armor.durability + self.boots_armor.durability))
         else:
             self.health -= damage - self.helm_armor.durability + self.ches_armor.durability + \
                            self.pants_armor.durability + self.boots_armor.durability
@@ -382,9 +377,11 @@ while playing:
     for item in jemi.current_location.items:
         print(item.name)
         if jemi.current_location == Mexico:
-            print("An enemy is in this room fight or flee.")
+            print("There is an enemy in this room.")
             ogor.attack(jemi)
             jemi.attack(ogor)
+            if ogor.health is not 0:
+                ogor.attack(jemi)
             if jemi.health == 0:
                 print("Game Over. You have fallen to the nasty ogor......")
                 quit(0)
