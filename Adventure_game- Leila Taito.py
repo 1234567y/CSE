@@ -248,8 +248,16 @@ class Character(object):
         if damage < self.helm_armor.durability + self.ches_armor.durability \
                 + self.pants_armor.durability \
                 + self.boots_armor.durability:
+                print("%s helmet =" % self.name, self.helm_armor.durability - damage)
+                print("%s chest plate =" % self.name, self.ches_armor.durability - damage)
+                print("%s pants =" % self.name, self.pants_armor.durability - damage)
+                print("%s boots =" % self.name, self.boots_armor.durability - damage)
+                if self.helm_armor.durability + self.ches_armor.durability \
+                    + self.pants_armor.durability + self.boots_armor.durability == 0:  # Error can't be fixed.
+                    self.health -= damage
                 print("No damage is done because of some fabulous armor!")
-        else:
+        if self.helm_armor.durability + self.ches_armor.durability + self.pants_armor.durability \
+                + self.boots_armor.durability == 0:
             self.health -= damage - self.helm_armor.durability + self.ches_armor.durability + \
                            self.pants_armor.durability + self.boots_armor.durability
             if self.health < 0:
@@ -380,12 +388,14 @@ while playing:
             print("There is an enemy in this room.")
             ogor.attack(jemi)
             jemi.attack(ogor)
-            if ogor.health is not 0:
-                ogor.attack(jemi)
+            ogor.attack(jemi)
+            jemi.attack(ogor)
+            ogor.attack(jemi)
             if jemi.health == 0:
                 print("Game Over. You have fallen to the nasty ogor......")
                 quit(0)
-            else:
+            if ogor.health == 0:
+                print("Ogor health = %s" % ogor.health)
                 print("You have slain the nasty ogor. Continue")
                 Mexico.items.remove(ogor)
 
