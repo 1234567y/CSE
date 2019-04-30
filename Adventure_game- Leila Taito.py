@@ -248,45 +248,14 @@ class Character(object):
         if damage < self.helm_armor.durability + self.ches_armor.durability \
                 + self.pants_armor.durability \
                 + self.boots_armor.durability:
-            if self.helm_armor.durability == -30:
-                print("You've been hit")
-                self.health - damage
-
-            if self.ches_armor.durability == -30:
-                print("You've been hit")
-                self.health - damage
-
-            if self.pants_armor.durability == -30:
-                print("You've been hit")
-                self.health - damage
-
-            if self.boots_armor.durability == -30:
-                print("You've been hit")
-                self.health - damage
                 print("%s helmet =" % self.name, self.helm_armor.durability - damage)
                 print("%s chest plate =" % self.name, self.ches_armor.durability - damage)
                 print("%s pants =" % self.name, self.pants_armor.durability - damage)
                 print("%s boots =" % self.name, self.boots_armor.durability - damage)
                 print("No damage is done because of some fabulous armor!")
-        if self.helm_armor.durability == -30:
-            print("You've been hit")
-            self.health - damage
 
-        if self.ches_armor.durability == -30:
-            print("You've been hit")
-            self.health - damage
-
-        if self.pants_armor.durability == -30:
-            print("You've been hit")
-            self.health - damage
-
-        if self.boots_armor.durability == -30:
-            print("You've been hit")
-            self.health - damage
-
-        if self.health < 0:
-            self.health = 0
-            print("%s has fallen, with left" % self.name)
+        else:
+            damage -= self.health
 
     def attack(self, target):
         print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
