@@ -348,7 +348,7 @@ Mexico.items.append(ogor)
 Mexico.items.append(treasures)
 Antioch.east = DailyCity
 Antioch.items.append(ogor)
-Antioch.items.append(Treasure2)
+Antioch.items.append(treasure)
 DailyCity.south = Clovis
 Clovis.east = Selma
 Selma.north = Hanford
@@ -356,7 +356,6 @@ Hanford.west = Dinuba
 Hanford.items.append(treasures)
 Dinuba.south = Madera
 Madera.west = Riverdale
-Riverdale.items.append(treasure)
 
 jemi = Player(Fresno)
 
@@ -382,14 +381,19 @@ while playing:
             jemi.attack(ogor)
             ogor.attack(jemi)
             jemi.attack(ogor)
-            ogor.attack(jemi)
-            if jemi.health == 0:
-                print("Game Over. You have fallen to the nasty ogor......")
-                quit(0)
+            ogor.helm_armor.durability = 0
+            ogor.ches_armor.durability = 0
+            ogor.pants_armor.durability = 0
+            ogor.boots_armor.durability = 0
+            ogor.health = 0
+            print("Ogor helmet = %s" % ogor.helm_armor.durability)
+            print("Ogor chest plate = %s" % ogor.ches_armor.durability)
+            print("Ogor pants = %s" % ogor.pants_armor.durability)
+            print("Ogor boots = %s" % ogor.boots_armor.durability)
+            print("Ogor health = %s" % ogor.health)
             if ogor.health == 0:
-                print("Ogor health = %s" % ogor.health)
-                print("You have slain the nasty ogor. Continue")
-                Mexico.items.remove(ogor)
+                jemi.current_location.items.remove(ogor)
+                print("Ogor died")
 
     print("Jemi's helmet is the %s" % jemi.helm_armor.name)
     print("Jemi's chest plate is %s" % jemi.ches_armor.name)
