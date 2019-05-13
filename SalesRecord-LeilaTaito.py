@@ -79,6 +79,8 @@ Baby_Food = round(totalBF, 2)
 Cereal = round(totalCE, 2)
 Item = [Fruits, Clothes, Beverages, Meat, Office_Supplies, Cosmetics, Snacks, Personal_Care, Vegetables, Household,
         Baby_Food, Cereal]
+item_names = ["Fruits", "Clothes", "Beverages", 'Meat', 'Office_Supplies', "Cosmetics", 'Snacks', 'Personal_Care',
+              'Vegetables', 'Household', 'Baby_Food', 'Cereal']
 print("Fruits =", Fruits)
 print('Clothes =', Clothes)
 print('Beverages =', Beverages)
@@ -91,4 +93,8 @@ print('Vegetables =', Vegetables)
 print('Household =', Household)
 print('Baby Food =', Baby_Food)
 print('Cereal =', Cereal)
-print("The one with the highest profit is", max(Item))
+highest_profit = max(Item)
+index = Item.index(highest_profit)
+item_name = item_names[index]
+print("The one with the highest profit is", item_name)
+
