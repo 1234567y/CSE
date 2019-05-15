@@ -234,8 +234,22 @@ class Hands(Sword):
         self.description = description
 
 
+class Trea(Treasure):
+    def __init__(self, name, description):
+        super(Trea, self).__init__(name)
+        self.name = name
+        self.description = description
+
+
+class Trea2(Treasure):
+    def __init__(self, name, description):
+        super(Trea2, self).__init__(name)
+        self.name = name
+        self.description = description
+
+
 class Character(object):
-    def __init__(self, name, health, weapon, helmet, chestplate, pants, boots):
+    def __init__(self, name, health, weapon, helmet, chestplate, pants, boots, treasure1, treasure2):
         self.name = name
         self.health = health
         self.weapon = weapon
@@ -243,6 +257,8 @@ class Character(object):
         self.ches_armor = chestplate
         self.pants_armor = pants
         self.boots_armor = boots
+        self.treasure1 = treasure1
+        self.treasure2 = treasure2
 
     def take_damage(self, damage):
         if damage < self.helm_armor.durability + self.ches_armor.durability \
@@ -267,7 +283,9 @@ class Player(Character):
         super(Player, self).__init__("Jemi", 100, Hands('hands', 'You have no weapon', 2, 0), DefaultH("hat"),
                                      DefaultC("shirt"),
                                      DefaultP("pants"),
-                                     DefaultB("boots"))
+                                     DefaultB("boots"),
+                                     Trea("None", "get treasure"),
+                                     Trea2("None", "get treasure"))
         self.health = 100
         self.inventory = []
         self.current_location = starting_location
@@ -303,7 +321,7 @@ chain_boots = ChainB("chain boots", "This is boots")
 leather_boots = LeatherB("leather boots", "This is boots")
 
 # Character set up
-ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots)
+ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots, None, None)
 
 # Rooms
 Fresno = Room("Fresno", None, "You start in Fresno. Pick which weapon you want", None, None, None)
@@ -372,6 +390,13 @@ while playing:
     strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability
     strength2 = jemi.pants_armor.durability + jemi.boots_armor.durability
     Overall = strength1 + strength2
+
+    if jemi.current_location.name is Madera:
+        if jemi.inventory == (treasure, treasures):
+            print("You have completed the game.")
+            playing = False
+        else:
+            print("You must go back and find the two treasures under the name of treasure #1 and treasure #2.")
 
     for item in jemi.current_location.items:
         print(item.name)

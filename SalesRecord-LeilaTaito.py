@@ -97,4 +97,3 @@ highest_profit = max(Item)
 index = Item.index(highest_profit)
 item_name = item_names[index]
 print("The one with the highest profit is", item_name)
-
