@@ -324,13 +324,13 @@ leather_boots = LeatherB("leather boots", "This is boots")
 ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots, None, None)
 
 # Rooms
-Fresno = Room("Fresno", None, "You start in Fresno. Pick which weapon you want", None, None, None)
+Fresno = Room("Fresno", None, "You start in Fresno. Pick which weapon you want, go west", None, None, None)
 Kerman = Room("Kerman", None, "This is the second room there should be some armor", Fresno, None, None)
 LA = Room("LA", Kerman, "Leads to another room", None, None, None)
 SanFransisco = Room("SanFransisco", None, "Leads to another room", None, None, LA)
 Washington = Room("Washington", None, "Leads to another room", None, SanFransisco, None)
 Oregon = Room("Oregon", None, "Leads to another room", Washington, None, None)
-Mexico = Room("Mexico", None, "Leads to another room", None, None, Oregon)
+Mexico = Room("Mexico", None, "Go North.", None, None, Oregon)
 Antioch = Room("Antioch", Mexico, "Leads to another room", None, None, None)
 DailyCity = Room("DailyCity", None, "Leads to another room", None, Antioch, None)
 Clovis = Room("Clovis", None, "Leads to another room", None, None, DailyCity)
@@ -365,7 +365,6 @@ Mexico.north = Antioch
 Mexico.items.append(ogor)
 Mexico.items.append(treasures)
 Antioch.east = DailyCity
-Antioch.items.append(ogor)
 Antioch.items.append(treasure)
 DailyCity.south = Clovis
 Clovis.east = Selma
@@ -382,7 +381,7 @@ short_directions = ['n', 's', 'e', 'w']
 playing = True
 
 # Controller
-while playing:
+while playing is True:
     print(jemi.current_location.name)
     print(jemi.current_location.description)
     print("Jemi is in %s" % jemi.current_location.name)
@@ -417,8 +416,16 @@ while playing:
             print("Ogor boots = %s" % ogor.boots_armor.durability)
             print("Ogor health = %s" % ogor.health)
             if ogor.health == 0:
-                jemi.current_location.items.remove(ogor)
-                print("Ogor died")
+                    jemi.current_location.items.remove(ogor)
+                    print("Ogor died")
+
+    if jemi.current_location == Riverdale:
+        print("Tester")
+        if (treasure, treasures) in jemi.inventory:
+            print("You may pass")
+            playing = False
+        else:
+            print("Go back and find the treasure")
 
     print("Jemi's helmet is the %s" % jemi.helm_armor.name)
     print("Jemi's chest plate is %s" % jemi.ches_armor.name)
