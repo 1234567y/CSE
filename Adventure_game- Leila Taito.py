@@ -298,8 +298,8 @@ class Player(Character):
 
 
 # Items
-treasure = Treasure2("treasure #2", "This is an item you need")
-treasures = Treasure1("treasure #1", "You also need this to win the game")
+treasure = Treasure2("treasure #1", "This is an item you need")
+treasures = Treasure1("treasure #2", "You also need this to win the game")
 iron_sword = IronS("iron sword", "This is a sword", 60)
 diamond_sword = DiamondS("diamond sword", "This is the strongest sword you can get", 90)
 wood_sword = WoodS("wood sword", "This is the weakest sword you can get", 10)
@@ -324,7 +324,9 @@ leather_boots = LeatherB("leather boots", "This is boots")
 ogor = Character("Ogor", 100, iron_sword, iron_helmet, iron_chestplate, iron_pants, iron_boots, None, None)
 
 # Rooms
-Fresno = Room("Fresno", None, "You start in Fresno. Pick which weapon you want, go west", None, None, None)
+Fresno = Room("Fresno", None, "Your moves are n, e, s, w, pick up , and drop. If you have an item in your inventory "
+                              "already you must first drop it then pick up tyhe next item."
+                              "else up you must drop the item that currently in it's spot", None, None, None)
 Kerman = Room("Kerman", None, "This is the second room there should be some armor", Fresno, None, None)
 LA = Room("LA", Kerman, "Leads to another room", None, None, None)
 SanFransisco = Room("SanFransisco", None, "Leads to another room", None, None, LA)
@@ -338,11 +340,10 @@ Selma = Room("Selma", None, "Leads to another room", None, Clovis, None)
 Hanford = Room("Hanford", Selma, "Leads to another room", None, None, None)
 Dinuba = Room("Dinuba", None, "Leads to another room", Hanford, None, None)
 Madera = Room("Madera", None, "Leads to another room", None, None, Dinuba)
-Riverdale = Room("Riverdale", "Leads to another room", Fresno, Madera, None, None)
+Riverdale = Room("Riverdale", None, "Leads to another room", None, Madera, None, None)
 
 # Defining
 Fresno.west = Kerman
-Fresno.north = Riverdale
 Fresno.items.append(wood_sword)
 Fresno.items.append(iron_sword)
 Kerman.north = LA
@@ -382,20 +383,12 @@ playing = True
 
 # Controller
 while playing is True:
-    print(jemi.current_location.name)
-    print(jemi.current_location.description)
     print("Jemi is in %s" % jemi.current_location.name)
-    print("You're commands are n, e, s, w, pick up, drop")
+    print(jemi.current_location.description)
+    print("You're commands are n, e, s, w, pick up, and drop")
     strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability
     strength2 = jemi.pants_armor.durability + jemi.boots_armor.durability
     Overall = strength1 + strength2
-
-    if jemi.current_location.name is Madera:
-        if jemi.inventory == (treasure, treasures):
-            print("You have completed the game.")
-            playing = False
-        else:
-            print("You must go back and find the two treasures under the name of treasure #1 and treasure #2.")
 
     for item in jemi.current_location.items:
         print(item.name)
@@ -410,10 +403,9 @@ while playing is True:
             ogor.pants_armor.durability = 0
             ogor.boots_armor.durability = 0
             ogor.health = 0
-            print("Ogor helmet = %s" % ogor.helm_armor.durability)
-            print("Ogor chest plate = %s" % ogor.ches_armor.durability)
-            print("Ogor pants = %s" % ogor.pants_armor.durability)
-            print("Ogor boots = %s" % ogor.boots_armor.durability)
+            print("Ogor helmet = %s" % ogor.helm_armor.durability,
+                  ", Ogor chest plate = %s" % ogor.ches_armor.durability)
+            print("Ogor pants = %s" % ogor.pants_armor.durability, ", Ogor boots = %s" % ogor.boots_armor.durability)
             print("Ogor health = %s" % ogor.health)
             if ogor.health == 0:
                     jemi.current_location.items.remove(ogor)
@@ -421,16 +413,15 @@ while playing is True:
 
     if jemi.current_location == Riverdale:
         print("Tester")
-        if (treasure, treasures) in jemi.inventory:
-            print("You may pass")
-            playing = False
+        if treasure in jemi.inventory:
+            print("Good for you, you've completed the game.")
+            if treasures in jemi.inventory:
+                quit(0)
         else:
-            print("Go back and find the treasure")
+            print("Go back to find the treasures stupid.")
 
-    print("Jemi's helmet is the %s" % jemi.helm_armor.name)
-    print("Jemi's chest plate is %s" % jemi.ches_armor.name)
-    print("Jemi's pants is %s" % jemi.pants_armor.name)
-    print("Jemi's shoes is %s" % jemi.boots_armor.name)
+    print("Jemi's helmet is the %s" % jemi.helm_armor.name, ", Jemi's chest plate is %s" % jemi.ches_armor.name)
+    print("Jemi's pants is %s" % jemi.pants_armor.name, ", Jemi's shoes is %s" % jemi.boots_armor.name)
     print("Jemi's weapon is %s" % jemi.weapon.name)
     print("Your strength is %s" % Overall)
     print("Your power is %s" % jemi.weapon.damage)
@@ -468,6 +459,14 @@ while playing is True:
             print("I don't see one")
 
         else:
+            if found_item is treasure:
+                print("Treasure 1")
+                jemi.inventory.append(found_item)
+
+            if found_item is treasures:
+                print("Treasure 2")
+                jemi.inventory.append(found_item)
+
             if type(jemi.helm_armor) is DefaultH:
                 if found_item in [diamond_helmet, chain_helmet, iron_helmet, leather_helmet]:
                     jemi.helm_armor = found_item
@@ -490,19 +489,12 @@ while playing is True:
 
             jemi.inventory.append(found_item)
             jemi.current_location.items.remove(found_item)
-            print("You picked up the %s" % found_item.name)
-            print("Jemi's helmet is the %s" % jemi.helm_armor.name)
-            print("Jemi's chest plate is %s" % jemi.ches_armor.name)
-            print("Jemi's pants is %s" % jemi.pants_armor.name)
-            print("Jemi's shoes is %s" % jemi.boots_armor.name)
-            print("Jemi's weapon is %s" % jemi.weapon.name)
-            print("Your power is %s" % jemi.weapon.damage)
 
-            strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability \
+        strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability \
                         + jemi.pants_armor.durability + jemi.boots_armor.durability
 
-            Overall = strength1
-            print("Your strength is %s" % Overall)
+        Overall = strength1
+        print("Your strength is %s" % Overall)
 
     elif "drop" in command:
         item_name = command[5:]
@@ -538,13 +530,6 @@ while playing is True:
                     jemi.weapon = Hands('hands', 'You have no weapon', 2, 0)
             jemi.inventory.remove(found_item)
             jemi.current_location.items.append(found_item)
-            print("You have dropped %s" % found_item.name)
-            print("Jemi's helmet is %s" % jemi.helm_armor.name)
-            print("Jemi's chest plate is %s" % jemi.ches_armor.name)
-            print("Jemi's pants is %s" % jemi.pants_armor.name)
-            print("Jemi's boots is %s" % jemi.boots_armor.name)
-            print("Jemi's weapon is %s" % jemi.weapon.name)
-            print("Your power is %s" % jemi.weapon.damage)
             strength1 = jemi.helm_armor.durability + jemi.ches_armor.durability
             strength2 = jemi.pants_armor.durability + jemi.boots_armor.durability
             Overall = strength1 + strength2
